@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Isabelly ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tela Inicial -->
+  <section class="hero">
+    <h1>Isabelly</h1>
+    <p>Hoje o mundo acordou mais bonito.</p>
+    <button onclick="scrollToSection('carta')">Clique aqui</button>
+  </section>
+
+  <!-- Carta -->
+  <section id="carta" class="section">
+    <h2>Uma carta para você</h2>
+    <p id="typing"></p>
+  </section>
+
+  <!-- Galeria -->
+  <section class="section">
+    <h2>Nossos Momentos</h2>
+    <div class="gallery">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200">
+        <p>O dia em que percebi que você era diferente.</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200">
+        <p>O sorriso que mudou meu mundo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contador -->
+  <section class="section">
+    <h2>Desde que você entrou na minha vida</h2>
+    <p id="contador"></p>
+  </section>
+
+  <!-- Botão surpresa -->
+  <section class="section">
+    <button class="danger" onclick="surpresa()">Não clique</button>
+    <p id="mensagemSecreta"></p>
+  </section>
+
+  <!-- Final -->
+  <section class="final">
+    <canvas id="stars"></canvas>
+    <div class="final-text">
+      <h2>Mesmo no meio do universo…</h2>
+      <p>Eu escolheria você.</p>
+    </div>
+  </section>
+
+<script src="script.js"></script>
+</body>
+</html>
 
