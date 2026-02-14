@@ -1,1 +1,74 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #fce4ec;
+  color: #333;
+  text-align: center;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(to bottom right, #f8bbd0, #fce4ec);
+}
+
+.hero h1 {
+  font-size: 4em;
+  margin: 0;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #e91e63;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+.section {
+  padding: 80px 20px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.danger {
+  background: black;
+}
+
+.final {
+  position: relative;
+  height: 100vh;
+  background: black;
+  color: white;
+  overflow: hidden;
+}
+
+.final-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
