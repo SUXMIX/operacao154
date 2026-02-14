@@ -1,47 +1,46 @@
-// Rolagem suave
-function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-}
+// Revelar seções
+const enterBtn = document.getElementById("enterBtn");
+const sections = document.querySelectorAll(".section");
+
+enterBtn.addEventListener("click", () => {
+  sections.forEach(sec => sec.classList.remove("hidden"));
+  window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+});
 
 // Efeito de digitação
-const text = "Desde que você entrou na minha vida, tudo ficou mais leve, mais bonito e mais verdadeiro.";
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 50);
+const text = "Você mudou a forma como eu vejo o mundo. Cada detalhe da minha vida ficou mais bonito depois que você chegou.";
+const typedText = document.getElementById("typedText");
+let index = 0;
+
+function typeEffect() {
+  if (index < text.length) {
+    typedText.innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 40);
   }
 }
-window.onload = typeWriter;
+typeEffect();
 
 // Contador emocional
-const inicio = new Date("2024-06-01"); // coloque a data real aqui
-function atualizarContador() {
-  const hoje = new Date();
-  const diff = hoje - inicio;
-  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("contador").innerText = 
-    `Há ${dias} dias você mudou completamente a minha vida.`;
-}
-setInterval(atualizarContador, 1000);
+const startDate = new Date("2024-01-01");
+const counter = document.getElementById("counter");
 
-// Surpresa
-function surpresa() {
-  const msg = document.getElementById("mensagemSecreta");
-  msg.innerText = "Era impossível você resistir. Eu também não resisti a você.";
-  msg.style.marginTop = "20px";
+function updateCounter() {
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  counter.innerText = days + " dias fazendo minha vida melhor.";
 }
+updateCounter();
 
-// Fundo estrelas
-const canvas = document.getElementById("stars");
+// CONSTELAÇÃO
+const canvas = document.getElementById("starsCanvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let stars = [];
-
 for (let i = 0; i < 100; i++) {
   stars.push({
     x: Math.random() * canvas.width,
@@ -60,6 +59,12 @@ function drawStars() {
   });
   requestAnimationFrame(drawStars);
 }
-
 drawStars();
 
+// Botão surpresa
+const secretBtn = document.getElementById("secretBtn");
+
+secretBtn.addEventListener("click", () => {
+  document.body.style.background = "black";
+  alert("Era impossível você resistir. Eu também não resisti a você.");
+});
