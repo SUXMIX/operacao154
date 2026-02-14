@@ -2,61 +2,55 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para Isabelly ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Tela Inicial -->
+  <!-- HERO -->
   <section class="hero">
     <h1>Isabelly</h1>
-    <p>Hoje o mundo acordou mais bonito.</p>
-    <button onclick="scrollToSection('carta')">Clique aqui</button>
+    <p class="subtitle">Hoje o universo tem um motivo especial para existir.</p>
+    <button id="enterBtn">Clique aqui</button>
   </section>
 
-  <!-- Carta -->
-  <section id="carta" class="section">
+  <!-- CARTA -->
+  <section class="section hidden" id="letterSection">
     <h2>Uma carta para você</h2>
-    <p id="typing"></p>
+    <p id="typedText"></p>
   </section>
 
-  <!-- Galeria -->
-  <section class="section">
-    <h2>Nossos Momentos</h2>
+  <!-- CONTADOR -->
+  <section class="section hidden" id="counterSection">
+    <h2>Desde que você entrou na minha vida...</h2>
+    <p id="counter"></p>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="section hidden" id="gallerySection">
+    <h2>Nossas Memórias</h2>
     <div class="gallery">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200">
-        <p>O dia em que percebi que você era diferente.</p>
+      <div class="photo">
+        <img src="https://via.placeholder.com/250" alt="">
+        <div class="overlay">Nesse dia eu percebi que você era diferente.</div>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200">
-        <p>O sorriso que mudou meu mundo.</p>
+      <div class="photo">
+        <img src="https://via.placeholder.com/250" alt="">
+        <div class="overlay">Seu sorriso mudou meu mundo.</div>
       </div>
     </div>
   </section>
 
-  <!-- Contador -->
-  <section class="section">
-    <h2>Desde que você entrou na minha vida</h2>
-    <p id="contador"></p>
-  </section>
-
-  <!-- Botão surpresa -->
-  <section class="section">
-    <button class="danger" onclick="surpresa()">Não clique</button>
-    <p id="mensagemSecreta"></p>
-  </section>
-
-  <!-- Final -->
-  <section class="final">
-    <canvas id="stars"></canvas>
-    <div class="final-text">
-      <h2>Mesmo no meio do universo…</h2>
-      <p>Eu escolheria você.</p>
+  <!-- CONSTELAÇÃO -->
+  <section class="section hidden" id="starsSection">
+    <canvas id="starsCanvas"></canvas>
+    <div class="finalMessage">
+      Mesmo no meio do universo, eu escolheria você.
+      <button id="secretBtn">Não clique</button>
     </div>
   </section>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
