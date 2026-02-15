@@ -1,32 +1,102 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Isabelly ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <main id="intro-screen" class="active">
-        <div class="background-overlay"></div>
-        <div class="content">
-            <h1 class="fade-in">Isabelly, você está preparada para ver o que fiz para você?</h1>
-            
-            <div class="button-wrapper fade-in-delayed">
-                <button id="btn-start">
-                    <span class="btn-text">SIM!</span>
-                    <div class="orbit fire"></div>
-                    <div class="orbit water"></div>
-                </button>
+    <!-- Página Principal -->
+    <div id="mainPage" class="page active">
+        <!-- Background com imagem desfocada -->
+        <div class="background-image"></div>
+        <div class="vignette"></div>
+        
+        <!-- Partículas flutuantes -->
+        <div class="particles-container" id="particles"></div>
+        
+        <!-- Overlay de gradiente animado -->
+        <div class="gradient-overlay"></div>
+        
+        <!-- Conteúdo Principal -->
+        <div class="content-wrapper">
+            <div class="main-content">
+                <!-- Texto principal com animação de entrada -->
+                <h1 class="main-title">
+                    <span class="title-line">Isabelly,</span>
+                    <span class="title-line">você está preparada</span>
+                    <span class="title-line">para ver o que fiz</span>
+                    <span class="title-line">para você?</span>
+                </h1>
+                
+                <!-- Container do botão com efeito de fogo e água -->
+                <div class="button-container">
+                    <!-- Efeito de água (azul/cyan) -->
+                    <div class="water-effect">
+                        <div class="water-particle water-1"></div>
+                        <div class="water-particle water-2"></div>
+                        <div class="water-particle water-3"></div>
+                        <div class="water-particle water-4"></div>
+                        <div class="water-particle water-5"></div>
+                        <div class="water-particle water-6"></div>
+                        <div class="water-circle water-circle-1"></div>
+                        <div class="water-circle water-circle-2"></div>
+                        <div class="water-circle water-circle-3"></div>
+                    </div>
+                    
+                    <!-- Efeito de fogo (laranja/vermelho) -->
+                    <div class="fire-effect">
+                        <div class="flame flame-1"></div>
+                        <div class="flame flame-2"></div>
+                        <div class="flame flame-3"></div>
+                        <div class="flame flame-4"></div>
+                        <div class="flame flame-5"></div>
+                        <div class="flame flame-6"></div>
+                        <div class="flame flame-7"></div>
+                        <div class="flame flame-8"></div>
+                        <div class="fire-circle fire-circle-1"></div>
+                        <div class="fire-circle fire-circle-2"></div>
+                        <div class="fire-circle fire-circle-3"></div>
+                    </div>
+                    
+                    <!-- Botão central -->
+                    <button id="mainButton" class="main-button">
+                        <span class="button-text">SIM!</span>
+                        <div class="button-glow"></div>
+                        <div class="button-ripple"></div>
+                    </button>
+                    
+                    <!-- Efeitos adicionais ao redor do botão -->
+                    <div class="orbit-ring orbit-ring-1"></div>
+                    <div class="orbit-ring orbit-ring-2"></div>
+                    <div class="orbit-ring orbit-ring-3"></div>
+                </div>
+                
+                <!-- Elementos decorativos -->
+                <div class="heart-decoration heart-1">❤️</div>
+                <div class="heart-decoration heart-2">💕</div>
+                <div class="heart-decoration heart-3">💖</div>
+                <div class="heart-decoration heart-4">✨</div>
+                <div class="heart-decoration heart-5">💫</div>
             </div>
         </div>
-    </main>
-
-    <section id="soon-screen">
-        <h2 class="typing-effect">EM BREVE</h2>
-    </section>
+    </div>
+    
+    <!-- Página "Em Breve" -->
+    <div id="comingSoonPage" class="page">
+        <div class="coming-soon-content">
+            <h2 class="coming-soon-text">EM BREVE</h2>
+            <div class="loading-hearts">
+                <span class="loading-heart">❤️</span>
+                <span class="loading-heart">❤️</span>
+                <span class="loading-heart">❤️</span>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
