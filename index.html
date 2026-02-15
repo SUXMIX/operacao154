@@ -3,244 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Isabelly ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>Para Isabelly</title>
     <style>
-        :root {
-            --fire-color: #ff4d00;
-            --water-color: #008cff;
-            --text-color: #ffffff;
-        }
-
+        /* --- Configurações de Base --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
             background-color: #000;
         }
 
-        /* Container Principal */
-        #main-container {
+        /* --- Tela Inicial: Background com Foto --- */
+        .main-container {
             position: relative;
             width: 100%;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
             transition: opacity 1s ease-in-out;
         }
 
-        /* Fundo com foto, desfoque e vinheta */
-        .background-overlay {
+        .bg-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg');
+            background: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg') no-repeat center center;
             background-size: cover;
-            background-position: center;
             filter: blur(8px) brightness(0.5);
             z-index: -2;
         }
 
+        /* Vinheta (Bordas Escurecidas) */
         .vignette {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%);
             z-index: -1;
         }
 
-        /* Conteúdo */
-        .content {
-            text-align: center;
-            color: var(--text-color);
-            padding: 20px;
-            max-width: 600px;
-            z-index: 10;
-        }
-
+        /* --- Tipografia --- */
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+            color: #fff;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            max-width: 80%;
+            margin-bottom: 50px;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            line-height: 1.2;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: fadeInDown 1.5s ease-out;
         }
 
-        /* O BOTÃO E AS ANIMAÇÕES DE FOGO/ÁGUA */
+        /* --- O Botão "Fogo e Água" --- */
         .btn-wrapper {
             position: relative;
-            display: inline-block;
-            padding: 40px; /* Espaço para as chamas/água rodarem */
+            width: 200px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Filtro de fusão para fazer o fogo e água parecerem líquidos */
+            filter: url('#gooey');
         }
 
-        .main-button {
+        .element-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Partículas de Fogo (Lado da Isabelly) */
+        .fire-particle {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ff5f00, #ff0000);
+            border-radius: 50%;
+            filter: blur(10px);
+            animation: fire-move 3s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        /* Partículas de Água (Seu lado) */
+        .water-particle {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(circle, #00d4ff, #0055ff);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            filter: blur(8px);
+            animation: water-move 4s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        /* Botão Real */
+        .btn-sim {
             position: relative;
+            z-index: 10;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             padding: 15px 45px;
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: bold;
             letter-spacing: 2px;
-            cursor: pointer;
             border-radius: 50px;
-            z-index: 5;
-            transition: transform 0.3s ease, background 0.3s ease;
-            outline: none;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            text-transform: uppercase;
         }
 
-        .main-button:hover {
-            transform: scale(1.05);
+        .btn-sim:hover {
+            transform: scale(1.1);
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Container dos elementos fluídos (Efeito Gooey) */
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            filter: blur(12px) contrast(25); /* Mágica do fogo/água */
-            pointer-events: none;
-        }
-
-        .element {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Fogo (Laranja/Vermelho) */
-        .fire {
-            background: var(--fire-color);
-            box-shadow: 0 0 20px var(--fire-color);
-            animation: rotateFire 4s infinite linear;
-        }
-
-        /* Água (Azul) */
-        .water {
-            background: var(--water-color);
-            box-shadow: 0 0 20px var(--water-color);
-            animation: rotateWater 4s infinite linear;
-        }
-
-        /* Animações de Rotação Orbital */
-        @keyframes rotateFire {
-            0% { transform: rotate(0deg) translateX(70px) scale(1); }
-            50% { transform: rotate(180deg) translateX(70px) scale(1.3); }
-            100% { transform: rotate(360deg) translateX(70px) scale(1); }
-        }
-
-        @keyframes rotateWater {
-            0% { transform: rotate(180deg) translateX(70px) scale(1.3); }
-            50% { transform: rotate(360deg) translateX(70px) scale(1); }
-            100% { transform: rotate(540deg) translateX(70px) scale(1.3); }
-        }
-
-        /* Adicionando múltiplas "gotas" para parecer mais orgânico */
-        .fire-2 { animation-delay: -1s; width: 30px; }
-        .water-2 { animation-delay: -0.5s; width: 35px; }
-
-        /* Tela de EM BREVE */
-        #soon-page {
+        /* --- Tela de Transição (Em Breve) --- */
+        #soon-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: black;
-            display: none;
+            height: 100vh;
+            background-color: #000;
+            display: none; /* Escondido inicialmente */
             justify-content: center;
             align-items: center;
             z-index: 100;
         }
 
-        #soon-page h2 {
+        #soon-screen h2 {
             color: white;
             font-size: 3rem;
             letter-spacing: 10px;
-            font-weight: 300;
-            animation: fadeInOut 3s infinite ease-in-out;
+            font-weight: 200;
+            animation: pulse 2s infinite ease-in-out;
         }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.3; }
+        /* --- Animações --- */
+        @keyframes fire-move {
+            0%, 100% { transform: translate(60px, 0) scale(1); }
+            25% { transform: translate(0, -30px) scale(1.3); }
+            50% { transform: translate(-60px, 0) scale(1); }
+            75% { transform: translate(0, 30px) scale(1.3); }
+        }
+
+        @keyframes water-move {
+            0%, 100% { transform: translate(-70px, 10px) scale(1.2); }
+            33% { transform: translate(10px, -40px) scale(0.9); }
+            66% { transform: translate(70px, 10px) scale(1.1); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
 
-        /* Responsividade */
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .main-button { padding: 12px 35px; font-size: 1rem; }
-            @keyframes rotateFire {
-                0% { transform: rotate(0deg) translateX(55px) scale(1); }
-                100% { transform: rotate(360deg) translateX(55px) scale(1); }
-            }
-            @keyframes rotateWater {
-                0% { transform: rotate(180deg) translateX(55px) scale(1); }
-                100% { transform: rotate(540deg) translateX(55px) scale(1); }
-            }
+            h1 { font-size: 1.5rem; }
+            .btn-sim { padding: 12px 35px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="main-container">
-        <div class="background-overlay"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+        <defs>
+            <filter id="gooey">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="gooey" />
+                <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="main-container" id="initial-content">
+        <div class="bg-image"></div>
         <div class="vignette"></div>
-        
-        <div class="content">
-            <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
-            
-            <div class="btn-wrapper">
-                <div class="particles-container">
-                    <div class="element fire"></div>
-                    <div class="element fire fire-2"></div>
-                    <div class="element water"></div>
-                    <div class="element water water-2"></div>
-                </div>
-                
-                <button class="main-button" onclick="startTransition()">SIM!</button>
+
+        <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
+
+        <div class="btn-wrapper">
+            <div class="element-container">
+                <div class="fire-particle" style="animation-delay: 0s;"></div>
+                <div class="fire-particle" style="animation-delay: -1s;"></div>
+                <div class="fire-particle" style="animation-delay: -2s;"></div>
             </div>
+            
+            <div class="element-container">
+                <div class="water-particle" style="animation-delay: 0s;"></div>
+                <div class="water-particle" style="animation-delay: -1.5s;"></div>
+                <div class="water-particle" style="animation-delay: -3s;"></div>
+            </div>
+
+            <button class="btn-sim" onclick="startTransition()">SIM!</button>
         </div>
     </div>
 
-    <div id="soon-page">
+    <div id="soon-screen">
         <h2>EM BREVE</h2>
     </div>
 
     <script>
         function startTransition() {
-            const main = document.getElementById('main-container');
-            const soon = document.getElementById('soon-page');
+            const initial = document.getElementById('initial-content');
+            const soon = document.getElementById('soon-screen');
 
-            // Efeito de fade out
-            main.style.opacity = '0';
-            
+            // Efeito de fade out na tela inicial
+            initial.style.opacity = '0';
+
             setTimeout(() => {
-                main.style.display = 'none';
+                initial.style.display = 'none';
                 soon.style.display = 'flex';
-                // Pequeno delay para o fade in do texto novo
+                // Pequeno delay para o fade in do texto
                 soon.style.opacity = '0';
                 setTimeout(() => {
+                    soon.style.transition = 'opacity 1s';
                     soon.style.opacity = '1';
                 }, 50);
             }, 1000);
