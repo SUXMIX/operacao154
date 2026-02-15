@@ -15,13 +15,14 @@
         }
 
         :root {
-            --primary-pink: #ff8aae; /* mais suave */
+            --primary-pink: #ff8aae;
             --dark-pink: #b23b6b;
             --light-pink: #ffe4ec;
             --cream: #fff9fb;
             --text-dark: #2d1b2e;
             --gold: #e6c300;
             --deep-space: #0a0c14;
+            --wave-blue: #1a2a3a; /* azul escuro para onda do universo */
         }
 
         html {
@@ -181,14 +182,14 @@
             }
         }
 
-        /* ============= ONDAS ANIMADAS (mais suaves e integradas) ============= */
+        /* ============= ONDAS ANIMADAS (ajustadas: maiores e sem fundo) ============= */
         .wave-separator {
             position: relative;
             width: 100%;
-            height: 120px;
+            height: 180px; /* aumentado para dar mais destaque */
             overflow: hidden;
             line-height: 0;
-            background: transparent; /* garante que não haja fundo branco */
+            background: transparent; /* garante que não haja fundo */
         }
 
         .wave-separator svg {
@@ -201,11 +202,11 @@
         }
 
         .wave-1 {
-            animation: wave 10s linear infinite;
+            animation: wave 12s linear infinite;
         }
 
         .wave-2 {
-            animation: wave 7s linear infinite;
+            animation: wave 8s linear infinite;
             opacity: 0.5;
         }
 
@@ -218,7 +219,7 @@
             }
         }
 
-        /* ============= SEÇÃO DA CARTA ============= */
+        /* ============= SEÇÃO DA CARTA (texto maior e mais espaçoso) ============= */
         .letter-section {
             min-height: 100vh;
             display: flex;
@@ -230,10 +231,11 @@
         }
 
         .letter-container {
-            max-width: 800px;
+            max-width: 900px; /* aumentado */
+            width: 100%;
             background: #ffffff;
-            padding: 3rem 2.5rem;
-            border-radius: 20px;
+            padding: 4rem 3.5rem; /* mais espaço nas laterais */
+            border-radius: 30px;
             box-shadow: 0 20px 60px rgba(178, 59, 107, 0.15),
                         0 0 0 1px rgba(255, 138, 174, 0.2);
             position: relative;
@@ -265,15 +267,15 @@
                 var(--light-pink) 10px,
                 var(--light-pink) 20px
             );
-            border-radius: 20px 20px 0 0;
+            border-radius: 30px 30px 0 0;
         }
 
         .letter-text {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-size: clamp(1.6rem, 3vw, 2.2rem); /* maior */
             color: var(--dark-pink);
             text-align: left;
-            line-height: 1.8;
+            line-height: 2; /* mais espaçamento */
             margin-top: 2rem;
             min-height: 200px;
             position: relative;
@@ -283,11 +285,11 @@
 
         .typing-cursor {
             display: inline-block;
-            width: 3px;
-            height: 1.5rem;
+            width: 4px; /* mais grosso */
+            height: 2rem;
             background: var(--dark-pink);
             animation: blink 1s infinite;
-            margin-left: 2px;
+            margin-left: 4px;
             vertical-align: middle;
         }
 
@@ -320,7 +322,7 @@
         .gallery-section {
             min-height: 100vh;
             padding: 5rem 2rem;
-            background: #ffe4ec; /* tom contínuo */
+            background: #ffe4ec;
         }
 
         .gallery-title {
@@ -329,7 +331,7 @@
             font-weight: 900;
             text-align: center;
             color: var(--dark-pink);
-            margin-bottom: 4rem;
+            margin-bottom: 1rem; /* reduzido */
             position: relative;
         }
 
@@ -338,8 +340,19 @@
             display: block;
             font-size: 2rem;
             color: var(--primary-pink);
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             animation: heartbeat 1.5s infinite;
+        }
+
+        /* Instrução de clique */
+        .gallery-sub {
+            text-align: center;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+            color: var(--dark-pink);
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0.9;
         }
 
         @keyframes heartbeat {
@@ -586,7 +599,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600'); /* James Webb style */
+            background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600');
             background-size: cover;
             background-position: center;
             filter: brightness(0.4);
@@ -681,7 +694,7 @@
             }
 
             .wave-separator {
-                height: 80px;
+                height: 120px; /* um pouco menor no mobile, mas ainda maior */
             }
 
             .gallery-grid {
@@ -693,6 +706,10 @@
                 top: 1rem;
                 right: 1rem;
                 font-size: 2.5rem;
+            }
+
+            .letter-container {
+                padding: 3rem 2rem; /* ajuste para telas pequenas */
             }
         }
 
@@ -745,11 +762,11 @@
         </div>
     </section>
 
-    <!-- ONDAS SEPARADORAS (hero -> carta) -->
+    <!-- ONDAS SEPARADORAS (hero -> carta) - MAIORES -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path class="wave-1" fill="#ff8aae" fill-opacity="0.6" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
-            <path class="wave-2" fill="#b23b6b" fill-opacity="0.4" d="M0,70 Q300,20 600,70 T1200,70 L1200,120 L0,120 Z M1200,70 Q1500,20 1800,70 T2400,70 L2400,120 L1200,120 Z"></path>
+        <svg viewBox="0 0 1200 180" preserveAspectRatio="none"> <!-- altura 180 -->
+            <path class="wave-1" fill="#ff8aae" fill-opacity="0.6" d="M0,80 Q300,130 600,80 T1200,80 L1200,180 L0,180 Z M1200,80 Q1500,130 1800,80 T2400,80 L2400,180 L1200,180 Z"></path>
+            <path class="wave-2" fill="#b23b6b" fill-opacity="0.4" d="M0,110 Q300,70 600,110 T1200,110 L1200,180 L0,180 Z M1200,110 Q1500,70 1800,110 T2400,110 L2400,180 L1200,180 Z"></path>
         </svg>
     </div>
 
@@ -762,15 +779,16 @@
 
     <!-- ONDAS SEPARADORAS (carta -> galeria) -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path class="wave-1" fill="#ff8aae" fill-opacity="0.6" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
-            <path class="wave-2" fill="#b23b6b" fill-opacity="0.4" d="M0,70 Q300,120 600,70 T1200,70 L1200,0 L0,0 Z M1200,70 Q1500,120 1800,70 T2400,70 L2400,0 L1200,0 Z"></path>
+        <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+            <path class="wave-1" fill="#ff8aae" fill-opacity="0.6" d="M0,80 Q300,30 600,80 T1200,80 L1200,0 L0,0 Z M1200,80 Q1500,30 1800,80 T2400,80 L2400,0 L1200,0 Z"></path>
+            <path class="wave-2" fill="#b23b6b" fill-opacity="0.4" d="M0,110 Q300,160 600,110 T1200,110 L1200,0 L0,0 Z M1200,110 Q1500,160 1800,110 T2400,110 L2400,0 L1200,0 Z"></path>
         </svg>
     </div>
 
     <!-- GALERIA -->
     <section class="gallery-section" id="gallery">
-        <h2 class="gallery-title scroll-reveal">Nossos Momentos</h2>
+        <h2 class="gallery-title scroll-reveal">Momentos</h2>
+        <div class="gallery-sub">(clique em cada foto para ver a descrição)</div>
         <div class="gallery-grid">
             <!-- Foto 1: ela sozinha -->
             <div class="gallery-item" data-description="Simplesmente a moça mais linda. Isabelly, você brilha até sem filtro! ✨">
@@ -806,9 +824,9 @@
 
     <!-- ONDAS SEPARADORAS (galeria -> timeline) -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path class="wave-1" fill="#b23b6b" fill-opacity="0.6" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
-            <path class="wave-2" fill="#ff8aae" fill-opacity="0.4" d="M0,70 Q300,20 600,70 T1200,70 L1200,120 L0,120 Z M1200,70 Q1500,20 1800,70 T2400,70 L2400,120 L1200,120 Z"></path>
+        <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+            <path class="wave-1" fill="#b23b6b" fill-opacity="0.6" d="M0,80 Q300,130 600,80 T1200,80 L1200,180 L0,180 Z M1200,80 Q1500,130 1800,80 T2400,80 L2400,180 L1200,180 Z"></path>
+            <path class="wave-2" fill="#ff8aae" fill-opacity="0.4" d="M0,110 Q300,70 600,110 T1200,110 L1200,180 L0,180 Z M1200,110 Q1500,70 1800,110 T2400,110 L2400,180 L1200,180 Z"></path>
         </svg>
     </div>
 
@@ -854,11 +872,11 @@
         </div>
     </section>
 
-    <!-- ONDAS SEPARADORAS (timeline -> universo) -->
+    <!-- ONDAS SEPARADORAS (timeline -> universo) - agora em azul escuro -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path class="wave-1" fill="#b23b6b" fill-opacity="0.5" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
-            <path class="wave-2" fill="#0a0c14" fill-opacity="0.3" d="M0,70 Q300,120 600,70 T1200,70 L1200,0 L0,0 Z M1200,70 Q1500,120 1800,70 T2400,70 L2400,0 L1200,0 Z"></path>
+        <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+            <path class="wave-1" fill="#1a2a3a" fill-opacity="0.7" d="M0,80 Q300,30 600,80 T1200,80 L1200,0 L0,0 Z M1200,80 Q1500,30 1800,80 T2400,80 L2400,0 L1200,0 Z"></path>
+            <path class="wave-2" fill="#0a0c14" fill-opacity="0.5" d="M0,110 Q300,160 600,110 T1200,110 L1200,0 L0,0 Z M1200,110 Q1500,160 1800,110 T2400,110 L2400,0 L1200,0 Z"></path>
         </svg>
     </div>
 
@@ -906,9 +924,8 @@
                 if (i < letterMessage.length) {
                     letterText.innerHTML += letterMessage.charAt(i);
                     i++;
-                    setTimeout(type, 50); // velocidade um pouco mais rápida para texto longo
+                    setTimeout(type, 50);
                 } else {
-                    // Adicionar cursor piscante no final
                     letterText.innerHTML += '<span class="typing-cursor"></span>';
                 }
             }
@@ -931,7 +948,7 @@
         }
 
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Chamar uma vez ao carregar
+        revealOnScroll();
 
         // ============= GALERIA MODAL =============
         const galleryItems = document.querySelectorAll('.gallery-item');
@@ -956,14 +973,12 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Fechar modal ao clicar fora da imagem
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Fechar modal com ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
@@ -987,7 +1002,7 @@
             heroBackground.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
         });
 
-        // ============= ADICIONAR ESTRELAS CADENTES NO UNIVERSO =============
+        // ============= ESTRELAS CADENTES =============
         function createShootingStar() {
             const universeSection = document.querySelector('.universe-section');
             const star = document.createElement('div');
@@ -1009,7 +1024,6 @@
             }, 2000);
         }
 
-        // Adicionar animação de estrela cadente
         const style = document.createElement('style');
         style.textContent = `
             @keyframes shootingStar {
@@ -1025,7 +1039,6 @@
         `;
         document.head.appendChild(style);
 
-        // Criar estrelas cadentes periodicamente
         setInterval(createShootingStar, 3000);
     </script>
 </body>
