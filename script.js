@@ -1,29 +1,25 @@
-// Aguarda o DOM carregar
-document.addEventListener('DOMContentLoaded', function() {
-    const botaoSim = document.getElementById('botao-sim');
-    const paginaInicial = document.getElementById('pagina-inicial');
-    const paginaBreve = document.getElementById('pagina-breve');
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('btn-start');
+    const introScreen = document.getElementById('intro-screen');
+    const soonScreen = document.getElementById('soon-screen');
 
-    // Função para transição suave entre páginas
-    function transitarParaBreve() {
-        // Adiciona classe para fade out na página inicial
-        paginaInicial.style.opacity = '0';
+    btn.addEventListener('click', () => {
+        // Efeito de fade out na primeira tela
+        introScreen.style.opacity = '0';
+        
         setTimeout(() => {
-            paginaInicial.classList.add('oculto');
-            paginaBreve.classList.remove('oculto');
-            paginaBreve.style.opacity = '1';
-        }, 500); // Tempo da transição
-    }
-
-    // Evento de clique no botão
-    botaoSim.addEventListener('click', transitarParaBreve);
-
-    // Opcional: Adicionar efeito de hover no botão com JS para mais interatividade
-    botaoSim.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.05)';
-    });
-
-    botaoSim.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
+            introScreen.style.display = 'none';
+            
+            // Ativa a tela "Em Breve"
+            soonScreen.style.display = 'flex';
+            soonScreen.style.opacity = '0';
+            
+            // Pequeno delay para o fade in suave
+            setTimeout(() => {
+                soonScreen.style.opacity = '1';
+                soonScreen.style.transition = 'opacity 2s ease';
+            }, 50);
+            
+        }, 1000); // Espera a animação de saída terminar
     });
 });
