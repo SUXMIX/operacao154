@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-88">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Aniversário, Isabelly! 💕</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -277,7 +277,9 @@
             50% { opacity: 1; transform: translateY(-20px) scale(1) rotate(10deg); }
         }
 
-        /* ============= DIVISÓRIAS ELEGANTES ============= */
+        /* ============= NOVAS TRANSIÇÕES ELEGANTES ============= */
+        
+        /* Transição 1: Divisória com estrela (mantida - você gostou) */
         .section-divider {
             position: relative;
             height: 150px;
@@ -318,12 +320,184 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Divisória diagonal elegante */
-        .diagonal-divider {
+        /* Transição 2: Gradiente suave com brilho */
+        .gradient-divider {
             position: relative;
-            height: 100px;
-            background: linear-gradient(135deg, var(--cream) 0%, var(--light-pink) 100%);
-            clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 70%);
+            height: 200px;
+            background: linear-gradient(180deg, 
+                #fff5fa 0%, 
+                rgba(255, 228, 236, 0.5) 25%,
+                rgba(255, 192, 213, 0.3) 50%,
+                rgba(255, 228, 236, 0.5) 75%,
+                #ffe4ec 100%
+            );
+            overflow: hidden;
+        }
+
+        .gradient-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 138, 174, 0.3), 
+                transparent
+            );
+            animation: slideShine 3s infinite;
+        }
+
+        @keyframes slideShine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        /* Transição 3: Partículas ascendentes */
+        .particles-divider {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(180deg, 
+                #ffe4ec 0%, 
+                #ffd9e6 50%,
+                #ffc0d5 100%
+            );
+            overflow: hidden;
+        }
+
+        .particles-divider::before {
+            content: '✨';
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: floatUp1 4s infinite;
+            left: 20%;
+        }
+
+        .particles-divider::after {
+            content: '💖';
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: floatUp2 4s infinite;
+            left: 70%;
+            animation-delay: 1s;
+        }
+
+        @keyframes floatUp1 {
+            0% {
+                bottom: 0;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: translateX(30px) rotate(360deg);
+            }
+        }
+
+        @keyframes floatUp2 {
+            0% {
+                bottom: 0;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: translateX(-30px) rotate(-360deg);
+            }
+        }
+
+        /* Transição 4: Barra de carregamento elegante */
+        .loading-divider {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(180deg, 
+                #ffd9e6 0%, 
+                #ffebf2 50%,
+                #fff9fb 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .loading-bar-container {
+            width: 300px;
+            height: 6px;
+            background: rgba(178, 59, 107, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .loading-bar {
+            height: 100%;
+            background: linear-gradient(90deg, 
+                var(--primary-pink), 
+                var(--dark-pink),
+                var(--primary-pink)
+            );
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: loadingSlide 2s infinite;
+            box-shadow: 0 0 20px rgba(255, 138, 174, 0.6);
+        }
+
+        @keyframes loadingSlide {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+
+        /* Transição 5: Fade com corações */
+        .hearts-divider {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(180deg, 
+                #fff9fb 0%, 
+                rgba(255, 249, 251, 0.5) 50%,
+                #0a0c14 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            overflow: hidden;
+        }
+
+        .heart-icon {
+            font-size: 2rem;
+            animation: heartPulseFloat 2s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        .heart-icon:nth-child(1) { animation-delay: 0s; }
+        .heart-icon:nth-child(2) { animation-delay: 0.3s; }
+        .heart-icon:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes heartPulseFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-10px) scale(1.2);
+                opacity: 0.8;
+            }
         }
 
         /* ============= SEÇÃO DA CARTA ============= */
@@ -722,7 +896,7 @@
             transform: scale(1.2) rotate(90deg);
         }
 
-        /* ============= NOVA SEÇÃO: TUDO SOBRE VOCÊ (CARDS) ============= */
+        /* ============= SEÇÃO SOBRE VOCÊ (CARDS) ============= */
         .about-section {
             min-height: 100vh;
             padding: 5rem 2rem;
@@ -994,6 +1168,9 @@
             .divider-line {
                 width: 100px;
             }
+            .loading-bar-container {
+                width: 200px;
+            }
         }
 
         /* ============= ANIMAÇÕES GERAIS ============= */
@@ -1056,7 +1233,6 @@
     </button>
 
     <!-- Audio: Vem Ser Minha - Charlie Brown Jr. -->
-    <!-- ATENÇÃO: Coloque o arquivo "vem-ser-minha.mp3" na mesma pasta deste HTML -->
     <audio id="bgMusic" loop preload="auto">
         <source src="vem-ser-minha.mp3" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
@@ -1077,7 +1253,7 @@
         </div>
     </section>
 
-    <!-- DIVISÓRIA ELEGANTE 1 -->
+    <!-- TRANSIÇÃO 1: Divisória com estrela (que você gostou) -->
     <div class="section-divider">
         <div class="divider-content">
             <div class="divider-line"></div>
@@ -1106,8 +1282,8 @@
         </div>
     </section>
 
-    <!-- DIVISÓRIA DIAGONAL -->
-    <div class="diagonal-divider"></div>
+    <!-- TRANSIÇÃO 2: Gradiente suave com brilho -->
+    <div class="gradient-divider"></div>
 
     <!-- GALERIA -->
     <section class="gallery-section" id="gallery">
@@ -1143,16 +1319,10 @@
         </div>
     </div>
 
-    <!-- DIVISÓRIA ELEGANTE 2 -->
-    <div class="section-divider">
-        <div class="divider-content">
-            <div class="divider-line"></div>
-            <div class="divider-ornament">✨</div>
-            <div class="divider-line"></div>
-        </div>
-    </div>
+    <!-- TRANSIÇÃO 3: Partículas ascendentes -->
+    <div class="particles-divider"></div>
 
-    <!-- NOVA SEÇÃO: TUDO SOBRE VOCÊ (CARDS) -->
+    <!-- SEÇÃO: TUDO SOBRE VOCÊ (CARDS) -->
     <section class="about-section" id="timeline">
         <h2 class="about-title scroll-reveal">Tudo Sobre Você</h2>
         <div class="about-grid">
@@ -1187,8 +1357,12 @@
         </div>
     </section>
 
-    <!-- DIVISÓRIA DIAGONAL -->
-    <div class="diagonal-divider"></div>
+    <!-- TRANSIÇÃO 4: Barra de carregamento elegante -->
+    <div class="loading-divider">
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
 
     <!-- UNIVERSO -->
     <section class="universe-section">
@@ -1197,6 +1371,13 @@
             <p class="universe-text">Mesmo no meio do universo,<br>eu escolheria você ♥</p>
         </div>
     </section>
+
+    <!-- TRANSIÇÃO 5: Fade com corações -->
+    <div class="hearts-divider">
+        <div class="heart-icon">💖</div>
+        <div class="heart-icon">💕</div>
+        <div class="heart-icon">💗</div>
+    </div>
 
     <!-- FOOTER ESCURO -->
     <section class="footer-section">
@@ -1412,6 +1593,24 @@
 
         // ============= CONFETTI ON BUTTON CLICK =============
         document.querySelector('.heart-button').addEventListener('click', createConfetti);
+
+        // ============= ANIMAÇÃO EXTRA PARA AS PARTÍCULAS NAS TRANSIÇÕES =============
+        // Criar mais partículas flutuantes na transição de partículas
+        const particlesDivider = document.querySelector('.particles-divider');
+        if (particlesDivider) {
+            for (let i = 0; i < 5; i++) {
+                const extraParticle = document.createElement('div');
+                extraParticle.style.cssText = `
+                    position: absolute;
+                    font-size: 1.2rem;
+                    animation: floatUp${i % 2 === 0 ? '1' : '2'} ${3 + Math.random() * 2}s infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                    left: ${20 + Math.random() * 60}%;
+                `;
+                extraParticle.textContent = i % 3 === 0 ? '✨' : (i % 3 === 1 ? '💖' : '⭐');
+                particlesDivider.appendChild(extraParticle);
+            }
+        }
     </script>
 </body>
 </html>
