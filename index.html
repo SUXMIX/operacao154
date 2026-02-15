@@ -1,101 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Isabelly 💕</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Aniversário Romântico</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 🏠 Tela Inicial -->
-    <section id="inicio" class="section active">
-        <div class="container">
-            <h1 class="nome">Isabelly</h1>
-            <p class="frase-forte">"Algumas pessoas entram na sua vida por um motivo... <br>Você entrou para ficar para sempre."</p>
-            <button id="btn-iniciar" class="btn">Clique aqui</button>
+    <div id="initial-page">
+        <div class="background"></div>
+        <div class="content">
+            <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
+            <button id="yes-button">SIM!</button>
         </div>
-    </section>
-
-    <!-- 💌 Carta Interativa -->
-    <section id="carta" class="section">
-        <div class="container">
-            <h2>Uma carta para você</h2>
-            <div id="texto-carta" class="carta-texto"></div>
-        </div>
-    </section>
-
-    <!-- 📸 Galeria Especial -->
-    <section id="galeria" class="section">
-        <div class="container">
-            <h2>Nossas memórias</h2>
-            <div class="grid-galeria">
-                <div class="card-foto" data-segredo="O dia que eu soube que era você">
-                    <div class="foto-placeholder">📸</div>
-                    <p class="memoria">Primeiro encontro</p>
-                    <span class="segredo">Clique para descobrir</span>
-                </div>
-                <div class="card-foto" data-segredo="Seu sorriso ilumina meus dias">
-                    <div class="foto-placeholder">📸</div>
-                    <p class="memoria">Seu sorriso</p>
-                    <span class="segredo">Clique para descobrir</span>
-                </div>
-                <div class="card-foto" data-segredo="O melhor abraço do mundo">
-                    <div class="foto-placeholder">📸</div>
-                    <p class="memoria">Nosso abraço</p>
-                    <span class="segredo">Clique para descobrir</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ⏳ Linha do Tempo -->
-    <section id="timeline" class="section">
-        <div class="container">
-            <h2>Nossa história</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-data">Quando nos conhecemos</div>
-                    <div class="timeline-texto">O dia que meu mundo mudou</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-data">Primeira conversa</div>
-                    <div class="timeline-texto">Quando percebi sua alma especial</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-data">Momento especial</div>
-                    <div class="timeline-texto">Quando eu soube que era amor</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-data">Hoje</div>
-                    <div class="timeline-texto">Ainda mais apaixonado</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 🎁 Seção Surpresa Final -->
-    <section id="surpresa" class="section">
-        <div class="container">
-            <h2>✨ Especial ✨</h2>
-            
-            <!-- Modo Memória -->
-            <div class="modo-memoria">
-                <button id="btn-memoria" class="btn-memoria">Ver o mundo como eu vejo você</button>
-                <p id="frase-memoria" class="frase-memoria"></p>
-            </div>
-
-            <!-- Botão Perigoso -->
-            <button id="btn-perigoso" class="btn-perigoso">Não clique</button>
-            <div id="mensagem-perigosa" class="mensagem-perigosa"></div>
-
-            <!-- Constelação -->
-            <div id="constelacao" class="constelacao">
-                <canvas id="canvas-estrelas"></canvas>
-                <p id="frase-constelacao" class="frase-constelacao"></p>
-            </div>
-        </div>
-    </section>
-
+    </div>
+    <div id="coming-soon" style="display: none;">
+        <h1>EM BREVE</h1>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
