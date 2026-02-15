@@ -1,356 +1,279 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Para Isabelly ❤️</title>
-    <style>
-        /* Reset e base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Isabelly ❤️</title>
 
-        body {
-            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-            overflow: hidden; /* remove scroll das telas cheias */
-            height: 100vh;
-            width: 100vw;
-            background: #000;
-        }
+<style>
 
-        /* Container principal que alterna as telas */
-        .screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transition: opacity 0.8s ease-in-out;
-            opacity: 0;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* =========================
+   RESET & BASE
+========================= */
 
-        .screen.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        /* Tela 1 - Entrada */
-        #screen1 {
-            background-color: #0a0a0a;
-        }
+body, html {
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
 
-        /* Fundo com imagem, desfoque e escurecimento */
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            filter: blur(5px) brightness(0.5); /* desfoque + escurecimento */
-            transform: scale(1.02); /* esconde leve borda do blur */
-        }
+/* =========================
+   BACKGROUND COM BLUR + VINHETA
+========================= */
 
-        /* Vinheta nas bordas (mais escura) */
-        .background::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 90%);
-            pointer-events: none;
-        }
+.background {
+    position: fixed;
+    inset: 0;
+    background-image: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    transform: scale(1.1);
+    z-index: -2;
+}
 
-        /* Conteúdo central */
-        .content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-            padding: 20px;
-            max-width: 800px;
-            width: 100%;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
-        }
+.overlay-dark {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, 
+        rgba(0,0,0,0.3) 0%, 
+        rgba(0,0,0,0.6) 60%, 
+        rgba(0,0,0,0.85) 100%);
+    z-index: -1;
+}
 
-        .content h1 {
-            font-size: clamp(1.8rem, 8vw, 3.5rem);
-            font-weight: 400;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            line-height: 1.3;
-            background: linear-gradient(135deg, #fff8e7, #ffe6c9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255,200,150,0.3);
-        }
+/* =========================
+   MAIN CONTAINER
+========================= */
 
-        /* Wrapper do botão para conter as animações */
-        .btn-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-top: 20px;
-        }
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 1.8s ease forwards;
+}
 
-        /* Botão SIM */
-        .sim-btn {
-            background: rgba(10, 10, 20, 0.6);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            color: white;
-            font-size: clamp(2rem, 10vw, 4rem);
-            font-weight: bold;
-            padding: 20px 60px;
-            border-radius: 80px;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 100, 0, 0.5);
-            transition: transform 0.2s, box-shadow 0.3s;
-            letter-spacing: 4px;
-            position: relative;
-            z-index: 20;
-            min-width: 250px;
-            border: none;
-            outline: none;
-            font-family: inherit;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        }
+.content {
+    max-width: 900px;
+}
 
-        .sim-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 45px rgba(255, 100, 0, 0.8), 0 0 25px rgba(0, 150, 255, 0.6);
-        }
+h1 {
+    color: white;
+    font-size: clamp(22px, 4vw, 40px);
+    font-weight: 300;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    animation: floatText 4s ease-in-out infinite;
+}
 
-        /* Elementos de fogo e água ao redor do botão */
-        .fire, .water {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none; /* para não atrapalhar clique */
-            z-index: 15;
-            filter: blur(8px);
-            mix-blend-mode: screen; /* efeito luminoso */
-        }
+/* =========================
+   BOTÃO FOGO + ÁGUA
+========================= */
 
-        /* Animações do fogo - chamas que sobem e tremem */
-        @keyframes fireRise {
-            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.8; }
-            50% { transform: translateY(-35px) scale(1.3) rotate(10deg); opacity: 0.5; }
-            100% { transform: translateY(-70px) scale(0.8) rotate(-5deg); opacity: 0; }
-        }
+.button-wrapper {
+    position: relative;
+    display: inline-block;
+}
 
-        @keyframes fireFlicker {
-            0% { opacity: 0.6; transform: scale(1) translateX(0); }
-            25% { opacity: 1; transform: scale(1.2) translateX(-5px); }
-            50% { opacity: 0.7; transform: scale(0.9) translateX(5px); }
-            75% { opacity: 0.9; transform: scale(1.1) translateX(-3px); }
-            100% { opacity: 0.6; transform: scale(1) translateX(0); }
-        }
+#magicButton {
+    position: relative;
+    padding: 18px 50px;
+    font-size: 20px;
+    border: none;
+    background: black;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    z-index: 2;
+    overflow: hidden;
+}
 
-        /* Animações da água - ondas suaves e movimento circular */
-        @keyframes waterFlow {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.6; }
-            25% { transform: translate(20px, -15px) scale(1.4) rotate(15deg); opacity: 0.4; }
-            50% { transform: translate(35px, 10px) scale(1.8) rotate(30deg); opacity: 0.2; }
-            75% { transform: translate(15px, 25px) scale(1.3) rotate(15deg); opacity: 0.3; }
-            100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.6; }
-        }
+#magicButton:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
 
-        @keyframes waterUndulate {
-            0% { border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%; }
-            25% { border-radius: 40% 60% 50% 50% / 50% 60% 40% 50%; }
-            50% { border-radius: 60% 40% 60% 40% / 40% 60% 60% 40%; }
-            75% { border-radius: 50% 50% 60% 40% / 50% 40% 60% 50%; }
-            100% { border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%; }
-        }
+/* Canvas para animação */
 
-        /* Gerando vários elementos de fogo e água via JS ou manualmente */
-        /* Vamos criar 6 de cada via CSS puro (nth-child) ou via JS. 
-           Para simplificar e ter mais controle, geraremos via JS, mas já deixamos as classes preparadas.
-        */
+#fireWaterCanvas {
+    position: absolute;
+    inset: -8px;
+    border-radius: 60px;
+    z-index: 1;
+}
 
-        /* Estilo dos elementos de fogo */
-        .fire {
-            background: radial-gradient(circle, #ffaa00 0%, #ff5500 60%, #ff2200 100%);
-            box-shadow: 0 0 30px #ff4500;
-            width: 50px;
-            height: 50px;
-            animation: fireRise 3s infinite ease-in-out, fireFlicker 1.2s infinite alternate;
-        }
+/* =========================
+   EM BREVE PAGE
+========================= */
 
-        /* Estilo dos elementos de água */
-        .water {
-            background: radial-gradient(circle, #aaddff 0%, #3399ff 50%, #0044aa 100%);
-            box-shadow: 0 0 30px #00aaff;
-            width: 45px;
-            height: 45px;
-            animation: waterFlow 5s infinite ease-in-out, waterUndulate 4s infinite alternate;
-        }
+#comingSoon {
+    position: fixed;
+    inset: 0;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(30px, 6vw, 70px);
+    letter-spacing: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
 
-        /* Tela 2 - EM BREVE */
-        #screen2 {
-            background: #000;
-            color: white;
-            flex-direction: column;
-        }
+#comingSoon.active {
+    opacity: 1;
+    pointer-events: all;
+}
 
-        #screen2 h2 {
-            font-size: clamp(3rem, 15vw, 8rem);
-            font-weight: 300;
-            letter-spacing: 15px;
-            animation: pulse 2s infinite;
-            text-transform: uppercase;
-            border: 2px solid rgba(255,255,255,0.2);
-            padding: 30px 60px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(2px);
-        }
+/* =========================
+   ANIMAÇÕES
+========================= */
 
-        @keyframes pulse {
-            0% { opacity: 0.7; text-shadow: 0 0 10px white; }
-            50% { opacity: 1; text-shadow: 0 0 30px cyan, 0 0 60px orange; }
-            100% { opacity: 0.7; text-shadow: 0 0 10px white; }
-        }
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 
-        /* Ajustes mobile */
-        @media (max-width: 600px) {
-            .sim-btn {
-                padding: 15px 30px;
-                font-size: 2.5rem;
-                min-width: 200px;
-            }
-            .content h1 {
-                font-size: 1.8rem;
-            }
-            .fire, .water {
-                width: 30px;
-                height: 30px;
-            }
-        }
-    </style>
+@keyframes floatText {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+/* =========================
+   RESPONSIVIDADE EXTRA
+========================= */
+
+@media (max-width: 500px) {
+    #magicButton {
+        padding: 15px 35px;
+        font-size: 16px;
+    }
+}
+
+</style>
 </head>
+
 <body>
 
-    <!-- Tela 1 - Entrada -->
-    <div class="screen active" id="screen1">
-        <div class="background"></div>
-        <div class="content">
-            <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
-            <div class="btn-wrapper" id="btnWrapper">
-                <button class="sim-btn" id="simBtn">SIM!</button>
-                <!-- Os elementos de fogo e água serão inseridos aqui via JS -->
-            </div>
+<div class="background"></div>
+<div class="overlay-dark"></div>
+
+<div class="container">
+    <div class="content">
+        <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
+        
+        <div class="button-wrapper">
+            <canvas id="fireWaterCanvas"></canvas>
+            <button id="magicButton">SIM!</button>
         </div>
     </div>
+</div>
 
-    <!-- Tela 2 - EM BREVE -->
-    <div class="screen" id="screen2">
-        <h2>EM BREVE</h2>
-    </div>
+<div id="comingSoon">EM BREVE</div>
 
-    <script>
-        (function() {
-            // Seleciona os elementos
-            const screen1 = document.getElementById('screen1');
-            const screen2 = document.getElementById('screen2');
-            const simBtn = document.getElementById('simBtn');
-            const btnWrapper = document.getElementById('btnWrapper');
+<script>
 
-            // Função para gerar elementos de fogo e água em torno do botão
-            function createElements() {
-                // Remove elementos antigos se houver (para recriar com responsividade)
-                const oldElements = btnWrapper.querySelectorAll('.fire, .water');
-                oldElements.forEach(el => el.remove());
+/* =========================
+   CANVAS FOGO + ÁGUA REALISTA
+========================= */
 
-                // Calcula o centro do botão para posicionar os elementos
-                const rect = simBtn.getBoundingClientRect();
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
+const canvas = document.getElementById("fireWaterCanvas");
+const ctx = canvas.getContext("2d");
+const button = document.getElementById("magicButton");
 
-                // Cria elementos de fogo (6 elementos)
-                for (let i = 0; i < 8; i++) {
-                    const fire = document.createElement('div');
-                    fire.classList.add('fire');
-                    
-                    // Posiciona ao redor do botão aleatoriamente, mas com um padrão circular
-                    const angle = (i / 8) * Math.PI * 2; // distribuição circular
-                    const radius = 90 + Math.random() * 40; // distância do centro
-                    const x = centerX + Math.cos(angle) * radius - 25; // ajuste metade do tamanho
-                    const y = centerY + Math.sin(angle) * radius - 25;
-                    
-                    fire.style.left = `${x}px`;
-                    fire.style.top = `${y}px`;
-                    
-                    // Personaliza a animação para cada um (variação)
-                    const duration = 2.5 + Math.random() * 2;
-                    const delay = Math.random() * 2;
-                    fire.style.animation = `fireRise ${duration}s infinite ease-in-out, fireFlicker ${1 + Math.random()}s infinite alternate`;
-                    fire.style.animationDelay = `${delay}s, 0s`;
-                    
-                    // Tamanhos variados
-                    const size = 30 + Math.random() * 30;
-                    fire.style.width = `${size}px`;
-                    fire.style.height = `${size}px`;
-                    fire.style.filter = `blur(${6 + Math.random() * 8}px)`;
-                    
-                    btnWrapper.appendChild(fire);
-                }
+function resizeCanvas() {
+    canvas.width = button.offsetWidth + 16;
+    canvas.height = button.offsetHeight + 16;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-                // Cria elementos de água (8 elementos)
-                for (let i = 0; i < 8; i++) {
-                    const water = document.createElement('div');
-                    water.classList.add('water');
-                    
-                    const angle = (i / 8) * Math.PI * 2 + 0.5; // deslocado em relação ao fogo
-                    const radius = 100 + Math.random() * 50;
-                    const x = centerX + Math.cos(angle) * radius - 22.5;
-                    const y = centerY + Math.sin(angle) * radius - 22.5;
-                    
-                    water.style.left = `${x}px`;
-                    water.style.top = `${y}px`;
-                    
-                    const duration = 4 + Math.random() * 4;
-                    const delay = Math.random() * 3;
-                    water.style.animation = `waterFlow ${duration}s infinite ease-in-out, waterUndulate ${3 + Math.random() * 3}s infinite alternate`;
-                    water.style.animationDelay = `${delay}s, 0s`;
-                    
-                    const size = 30 + Math.random() * 30;
-                    water.style.width = `${size}px`;
-                    water.style.height = `${size}px`;
-                    water.style.filter = `blur(${5 + Math.random() * 10}px)`;
-                    
-                    btnWrapper.appendChild(water);
-                }
-            }
+let particles = [];
 
-            // Chama ao carregar e ao redimensionar (reposiciona)
-            window.addEventListener('load', () => {
-                createElements();
-            });
+class Particle {
+    constructor(type) {
+        this.type = type; // fire or water
+        this.angle = Math.random() * Math.PI * 2;
+        this.radius = button.offsetWidth / 2 + 10;
+        this.speed = 0.01 + Math.random() * 0.01;
+        this.size = 2 + Math.random() * 3;
+    }
 
-            window.addEventListener('resize', () => {
-                createElements(); // recria com novas dimensões
-            });
+    update() {
+        this.angle += this.speed;
+    }
 
-            // Clique no botão SIM - muda para tela 2
-            simBtn.addEventListener('click', () => {
-                screen1.classList.remove('active');
-                screen2.classList.add('active');
-            });
+    draw() {
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
 
-            // Opcional: se quiser voltar à tela 1, poderia adicionar um botão "Voltar" na tela 2,
-            // mas por enquanto só ida.
-        })();
-    </script>
+        const x = centerX + Math.cos(this.angle) * this.radius;
+        const y = centerY + Math.sin(this.angle) * this.radius;
+
+        let gradient;
+
+        if (this.type === "fire") {
+            gradient = ctx.createRadialGradient(x, y, 0, x, y, this.size * 3);
+            gradient.addColorStop(0, "rgba(255,200,0,1)");
+            gradient.addColorStop(0.5, "rgba(255,80,0,0.8)");
+            gradient.addColorStop(1, "rgba(255,0,0,0)");
+        } else {
+            gradient = ctx.createRadialGradient(x, y, 0, x, y, this.size * 3);
+            gradient.addColorStop(0, "rgba(0,200,255,1)");
+            gradient.addColorStop(0.5, "rgba(0,100,255,0.8)");
+            gradient.addColorStop(1, "rgba(0,0,255,0)");
+        }
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(x, y, this.size * 3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < 80; i++) {
+    particles.push(new Particle(i % 2 === 0 ? "fire" : "water"));
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+/* =========================
+   TRANSIÇÃO
+========================= */
+
+button.addEventListener("click", () => {
+    document.querySelector(".container").style.opacity = "0";
+    document.querySelector(".container").style.transition = "1s ease";
+
+    setTimeout(() => {
+        document.getElementById("comingSoon").classList.add("active");
+    }, 1000);
+});
+
+</script>
+
 </body>
 </html>
