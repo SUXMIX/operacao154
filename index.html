@@ -1,392 +1,313 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>💖 para Isabelly · aniversário 💖</title>
-  <!-- fontes românticas & elegantes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    /* ----- RESET & BASE ----- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Minha Isabelly ❤️</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      overflow: hidden;           /* sem scroll, só telas cheias */
-      height: 100vh;
-      width: 100vw;
-      background-color: #110007;  /* fallback escuro */
-    }
+    <style>
+        :root {
+            --primary-pink: #ff85a2;
+            --dark-pink: #d44161;
+            --soft-bg: #fff5f7;
+            --text-color: #4a4a4a;
+        }
 
-    /* ----- PÁGINAS (transição suave) ----- */
-    .page {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.7s cubic-bezier(0.4, 0.0, 0.2, 1), visibility 0.7s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; background-color: var(--soft-bg); color: var(--text-color); }
 
-    .page.active {
-      opacity: 1;
-      visibility: visible;
-    }
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 20px;
+        }
 
-    /* ----- PÁGINA 1 – FUNDO COM FOTO ----- */
-    .page1 {
-      background-color: #1a0b0e;  /* tom quente por baixo */
-    }
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
 
-    /* camada da foto com desfoque */
-    .page1::before {
-      content: '';
-      position: absolute;
-      top: -5%;                   /* pequeno zoom pra evitar bordas claras */
-      left: -5%;
-      width: 110%;
-      height: 110%;
-      background-image: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg');
-      background-size: cover;
-      background-position: center 30%;  /* ajuste fino para focar no rosto */
-      background-repeat: no-repeat;
-      filter: blur(10px) brightness(0.7);  /* desfoque + escurecimento geral */
-      z-index: 0;
-    }
+        /* Botão com Corações */
+        .btn-ready {
+            position: relative;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: var(--dark-pink);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            overflow: visible;
+        }
 
-    /* overlay radial: bordas mais escuras, centro suave */
-    .page1 .dark-veil {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 90%);
-      z-index: 1;
-      pointer-events: none;       /* não atrapalha cliques */
-    }
+        .btn-ready:hover { transform: scale(1.1); }
 
-    /* conteúdo principal da página 1 */
-    .content {
-      position: relative;
-      z-index: 10;
-      max-width: 800px;
-      width: 90%;
-      padding: 1.5rem;
-      text-align: center;
-      color: white;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      animation: fadeInUp 1.2s ease-out forwards;
-    }
+        .heart-icon {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: fly 2s linear infinite;
+        }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fly {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
 
-    /* título principal */
-    .content h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(2rem, 10vw, 4.5rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-      background: linear-gradient(135deg, #ffe6f0, #ffd9e8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(255, 120, 160, 0.5);
-      letter-spacing: 0.03em;
-    }
+        /* --- ONDAS --- */
+        .waves-container {
+            width: 100%;
+            height: 100px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 10;
+        }
 
-    /* container do botão (para ajudar no posicionamento dos corações) */
-    .btn-wrapper {
-      position: relative;
-      display: inline-block;
-      margin-top: 1rem;
-    }
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg"><path d="M0 15Q30 5 60 15t60 0v13H0z" fill="%23d44161"/></svg>');
+            background-repeat: repeat-x;
+            background-size: 50% 100%;
+            animation: waveMove 5s linear infinite;
+        }
 
-    /* botão principal */
-    .btn {
-      position: relative;
-      background: linear-gradient(145deg, #ff9bb3, #ff708d);
-      border: none;
-      border-radius: 60px;
-      padding: 1.2rem 3.5rem;
-      font-size: clamp(1.8rem, 6vw, 2.8rem);
-      font-weight: 700;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 20px 35px rgba(255, 80, 120, 0.5), 0 5px 15px rgba(0,0,0,0.3), inset 0 -2px 5px rgba(255,255,255,0.3);
-      transition: transform 0.15s ease, box-shadow 0.2s ease;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(4px);
-      overflow: visible;          /* corações podem sair do botão */
-      min-width: 250px;
-    }
+        .wave2 { opacity: 0.5; animation-duration: 10s; bottom: -5px; }
 
-    /* texto do botão (acima dos corações) */
-    .btn-text {
-      position: relative;
-      z-index: 15;
-      display: inline-block;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 5px #b3003b;
-    }
+        @keyframes waveMove { 
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); } 
+        }
 
-    /* efeito de clique */
-    .btn:active {
-      transform: scale(0.96);
-      box-shadow: 0 10px 20px rgba(255, 60, 100, 0.6);
-    }
+        /* --- SEÇÃO CARTINHA --- */
+        .section-letter {
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-    /* animação dos corações (keyframe) */
-    @keyframes floatHeart {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(0.8);
-        opacity: 0;
-      }
-      20% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-180px) rotate(35deg) scale(1.8);
-        opacity: 0;
-      }
-    }
+        .envelope {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--dark-pink);
+        }
 
-    /* classe base para cada coração (estilos comuns) */
-    .heart {
-      position: absolute;
-      font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
-      pointer-events: none;        /* não atrapalha clique */
-      z-index: 10;                 /* abaixo do texto (z-index 15) */
-      line-height: 1;
-      filter: drop-shadow(0 0 8px rgba(255, 200, 220, 0.9));
-      animation-name: floatHeart;
-      animation-iteration-count: infinite;
-      animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
-      bottom: -10px;               /* ponto de partida (alguns serão ajustados via JS) */
-      left: 0;                     /* será sobrescrito por inline style */
-      will-change: transform, opacity;
-    }
+        .envelope::before {
+            content: "💌";
+            position: absolute;
+            top: -20px; right: 20px;
+            font-size: 40px;
+        }
 
-    /* ----- PÁGINA 2 (EM BREVE) ----- */
-    .page2 {
-      background: #0c0c0c;
-      color: white;
-      flex-direction: column;
-      gap: 2rem;
-    }
+        #typed-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            line-height: 1.6;
+        }
 
-    .coming-soon-content {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(4rem, 15vw, 8rem);
-      font-weight: 700;
-      background: linear-gradient(145deg, #eee, #aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px rgba(255, 200, 230, 0.4);
-      letter-spacing: 0.5rem;
-      animation: pulseGlow 2s infinite alternate;
-    }
+        /* --- GALERIA --- */
+        .gallery {
+            padding: 50px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    @keyframes pulseGlow {
-      0% { opacity: 0.9; text-shadow: 0 0 20px #ff99bb; }
-      100% { opacity: 1; text-shadow: 0 0 60px #ff4d7a, 0 0 20px #ffb3c6; }
-    }
+        .photo-frame {
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
 
-    /* pequeno texto extra para charme */
-    .subtle {
-      font-size: 1.2rem;
-      letter-spacing: 4px;
-      color: #aaa;
-      text-transform: uppercase;
-      border-top: 1px solid #333;
-      padding-top: 1.5rem;
-      width: 80%;
-      max-width: 400px;
-    }
+        .photo-frame:nth-child(even) { transform: rotate(3deg); }
+        .photo-frame:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
 
-    /* responsividade para celular: ajustes finos */
-    @media (max-width: 600px) {
-      .btn {
-        padding: 1rem 2.5rem;
-        min-width: 200px;
-      }
-      .content h1 {
-        margin-bottom: 2rem;
-      }
-      .coming-soon-content {
-        letter-spacing: 0.2rem;
-      }
-    }
+        .photo-frame img { width: 100%; height: 250px; object-fit: cover; }
+        .photo-frame p { text-align: center; margin-top: 10px; font-weight: bold; }
 
-    /* para telas muito pequenas, garante que o botão seja legível */
-    @media (max-width: 380px) {
-      .btn {
-        padding: 0.8rem 1.8rem;
-        font-size: 2rem;
-      }
-    }
-  </style>
+        /* --- LINHA DO TEMPO (FRASES) --- */
+        .timeline { padding: 80px 20px; background: white; text-align: center; }
+        .timeline-item {
+            margin: 40px 0;
+            padding: 20px;
+            border-bottom: 1px dashed var(--primary-pink);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* --- UNIVERSO --- */
+        .universe {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://img.vlb.it/nasa-james-webb-telescope-deep-field.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            padding: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            background: var(--soft-bg);
+        }
+
+        .author-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--dark-pink);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        /* --- MODAL DA FOTO --- */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        #modal img { max-width: 90%; max-height: 70%; border: 5px solid white; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .universe { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
-  <!-- PÁGINA 1 - INICIAL (ativa por padrão) -->
-  <div class="page page1 active" id="page1">
-    <!-- véu escuro radial (bordas mais escuras) -->
-    <div class="dark-veil"></div>
-    <div class="content">
-      <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
-      <div class="btn-wrapper">
-        <button class="btn" id="btnSim">
-          <!-- texto do botão com z-index mais alto -->
-          <span class="btn-text">SIM!</span>
-          <!-- os corações serão inseridos aqui dinamicamente via JS -->
-        </button>
-      </div>
+
+    <section class="hero">
+        <h1 data-aos="zoom-in">Isabelly, você está preparada para ver o que fiz para você?</h1>
+        <button class="btn-ready" onclick="startSurprise()">SIM! ❤️</button>
+    </section>
+
+    <div class="waves-container">
+        <div class="wave"></div>
+        <div class="wave wave2"></div>
     </div>
-  </div>
 
-  <!-- PÁGINA 2 - EM BREVE (invisível inicialmente) -->
-  <div class="page page2" id="page2">
-    <div class="coming-soon-content">EM BREVE</div>
-    <div class="subtle">💘  Isabelly  💘</div>
-  </div>
+    <section class="section-letter" id="letter-section">
+        <div class="envelope" data-aos="flip-up">
+            <div id="typed-text"></div>
+        </div>
+    </section>
 
-  <script>
-    (function() {
-      // ========== CRIAÇÃO DOS CORAÇÕES FLUTUANTES (EFEITO FOFO) ==========
-      function createFloatingHearts() {
-        const button = document.getElementById('btnSim');
-        if (!button) return;
+    <section class="gallery">
+        <div class="photo-frame" data-aos="fade-up" onclick="openModal('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg', 'Nosso momento especial')">
+            <img src="https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg" alt="Foto">
+            <p>Clique para ver ❤️</p>
+        </div>
+        </section>
 
-        // Remove corações antigos (se houver) para evitar duplicação
-        const oldHearts = button.querySelectorAll('.heart');
-        oldHearts.forEach(heart => heart.remove());
+    <section class="timeline">
+        <div class="timeline-item" data-aos="fade-right">"Você é a moça mais bonita que já vi."</div>
+        <div class="timeline-item" data-aos="fade-left">"Você é a moça mais engraçada que já conheci"</div>
+        <div class="timeline-item" data-aos="fade-right">"Você é a moça mais incrível que já conversei"</div>
+        <div class="timeline-item" data-aos="fade-left">"Você é a moça mais brava que existe nesse mundo"</div>
+        <div class="timeline-item" data-aos="fade-right">"Você também é a moça mais fofa"</div>
+        <div class="timeline-item" data-aos="fade-left">"Você é a moça mais fogo, enquanto eu sou o moço mais água"</div>
+        <div class="timeline-item" data-aos="zoom-in" style="border:none; font-weight: bold; color: var(--dark-pink);">
+            "Enfim, feliz aniversário, meu bem! Que Deus te proteja, guarde, ilumine, abençoe e guie..."
+        </div>
+    </section>
 
-        // Número de corações: entre 20 e 30 para um efeito cheio mas não poluído
-        const heartCount = Math.floor(Math.random() * 15) + 25; // 25-40 corações
+    <section class="universe">
+        <h2 data-aos="zoom-out">"Mesmo no meio do universo, eu escolheria você <3"</h2>
+    </section>
 
-        for (let i = 0; i < heartCount; i++) {
-          // criar elemento coração
-          const heart = document.createElement('span');
-          heart.className = 'heart';
-          heart.innerHTML = '❤️'; // coração clássico, também pode usar outros: 💖, 💗, 💕, 💓
+    <footer>
+        <img src="https://i.ibb.co/fY1sZk6f/20260105-121313.jpg" alt="Vitor" class="author-img">
+        <p>Feito com amor, por <strong>Vitor da Costa</strong>.</p>
+    </footer>
 
-          // --- estilos aleatórios para cada coração ---
-          
-          // posição horizontal (left) variada de 0% a 100%
-          const leftPos = Math.random() * 100; // %
-          heart.style.left = leftPos + '%';
+    <div id="modal" onclick="this.style.display='none'">
+        <img id="modal-img" src="" alt="Ampliada">
+        <p id="modal-caption" style="margin-top: 20px;"></p>
+    </div>
 
-          // posição vertical de partida (bottom) entre -5px e 35px, para variar a altura de onde sobem
-          // valores negativos começam abaixo do botão, positivos dentro/ acima
-          const bottomStart = Math.random() * 40 - 10; // entre -10px e 30px
-          heart.style.bottom = bottomStart + 'px';
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
-          // tamanho da fonte (variação)
-          const fontSize = 0.7 + Math.random() * 2.0; // entre 0.7rem e 2.7rem
-          heart.style.fontSize = fontSize + 'rem';
+    <script>
+        // Inicializa animações de scroll
+        AOS.init({ duration: 1000 });
 
-          // duração da animação (2s a 6s)
-          const duration = 2 + Math.random() * 5; // 2-7s
-          heart.style.animationDuration = duration + 's';
-
-          // delay da animação (0 a 2.5s)
-          const delay = Math.random() * 2.5;
-          heart.style.animationDelay = delay + 's';
-
-          // pequena rotação inicial aleatória (só pra estética)
-          const rotate = Math.random() * 30 - 15; // -15deg a 15deg
-          heart.style.transform = `rotate(${rotate}deg)`;
-
-          // opacidade pode variar um pouco no início
-          heart.style.opacity = 0.3 + Math.random() * 0.3;
-
-          // bônus: alguns corações especiais (💖, 💗, 💘) para diversificar
-          if (i % 5 === 0) heart.innerHTML = '💖';
-          if (i % 7 === 0) heart.innerHTML = '💗';
-          if (i % 9 === 0) heart.innerHTML = '💕';
-          if (i % 11 === 0) heart.innerHTML = '💘';
-
-          // adicionar coração ao botão
-          button.appendChild(heart);
+        // Função do Botão Inicial
+        function startSurprise() {
+            document.getElementById('letter-section').scrollIntoView({ behavior: 'smooth' });
+            
+            // Inicia o efeito de escrever
+            new Typed('#typed-text', {
+                strings: ['Minha querida Isabelly...', 'Estou escrevendo isso para te dizer que...', 'EM BREVE colocarei nossa história completa aqui! ✍️❤️'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: false
+            });
         }
-      }
 
-      // ========== TRANSIÇÃO ENTRE PÁGINAS ==========
-      function setupPageTransition() {
-        const btn = document.getElementById('btnSim');
-        const page1 = document.getElementById('page1');
-        const page2 = document.getElementById('page2');
+        // Animação dos corações saindo do botão
+        setInterval(() => {
+            const btn = document.querySelector('.btn-ready');
+            const heart = document.createElement('span');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart-icon');
+            heart.style.left = Math.random() * 100 + '%';
+            btn.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000);
+        }, 400);
 
-        if (!btn || !page1 || !page2) return;
-
-        btn.addEventListener('click', function(e) {
-          e.preventDefault(); // não recarrega nada
-
-          // Desativa página 1, ativa página 2
-          page1.classList.remove('active');
-          page2.classList.add('active');
-
-          // Pequeno toque: vibrar se o navegador permitir (celular) - só pra tornar mais tátil
-          if (navigator.vibrate) {
-            navigator.vibrate(20); // vibração sutil
-          }
-        });
-      }
-
-      // ========== EXECUTAR APÓS O CARREGAMENTO DO DOM ==========
-      document.addEventListener('DOMContentLoaded', function() {
-        createFloatingHearts();   // gera corações únicos e animados
-        setupPageTransition();    // liga o clique ao botão
-
-        // (opcional) recriar corações se a janela for redimensionada?
-        // Não é necessário, mas se quiser, pode-se adicionar um listener com debounce.
-        // Por enquanto, os corações já estão lá e se adaptam ao tamanho.
-      });
-
-      // (opcional) caso queira que os corações sejam gerados novamente se a orientação mudar
-      // não é obrigatório, mas pode ajudar em mudanças extremas de layout.
-      // Vamos usar um evento de resize com debounce simples para recriar com novas dimensões
-      let resizeTimeout;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-          // recriar corações para se ajustarem melhor às novas proporções do botão
-          createFloatingHearts();
-        }, 200);
-      });
-
-    })();
-  </script>
-
-  <!-- (opcional) estilo adicional para microinterações: botão no hover (desktop) -->
-  <style>
-    /* só para desktop: efeito extra sem atrapalhar mobile */
-    @media (hover: hover) and (pointer: fine) {
-      .btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 30px 45px rgba(255, 80, 130, 0.7), 0 5px 20px rgba(0,0,0,0.4), inset 0 -2px 8px #fff9;
-        background: linear-gradient(145deg, #ffadc2, #ff809e);
-      }
-      .btn:hover .heart {
-        /* pequeno efeito: os corações podem acelerar ou mudar de cor? sutil */
-        filter: drop-shadow(0 0 12px #ffb3d9);
-      }
-    }
-  </style>
+        // Modal da Galeria
+        function openModal(src, text) {
+            document.getElementById('modal').style.display = 'flex';
+            document.getElementById('modal-img').src = src;
+            document.getElementById('modal-caption').innerText = text;
+        }
+    </script>
 </body>
 </html>
