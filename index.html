@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-88">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Aniversário, Isabelly! 💕</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -296,17 +296,21 @@
             gap: 2rem;
         }
 
-        /* Corações girando (substituem as linhas) */
-        .divider-heart {
-            font-size: 2.5rem;
-            color: var(--primary-pink);
-            animation: rotate 10s linear infinite;
-            display: inline-block;
+        .divider-line {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
+            animation: shimmer 3s infinite;
         }
 
         .divider-ornament {
             font-size: 2.5rem;
             animation: rotate 10s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         @keyframes rotate {
@@ -987,8 +991,8 @@
             .letter-text {
                 font-size: 1.3rem;
             }
-            .divider-heart, .divider-ornament {
-                font-size: 2rem;
+            .divider-line {
+                width: 100px;
             }
         }
 
@@ -1073,12 +1077,12 @@
         </div>
     </section>
 
-    <!-- DIVISÓRIA ELEGANTE 1 (agora com corações girando) -->
+    <!-- DIVISÓRIA ELEGANTE 1 -->
     <div class="section-divider">
         <div class="divider-content">
-            <div class="divider-heart">♥</div>
+            <div class="divider-line"></div>
             <div class="divider-ornament">✨</div>
-            <div class="divider-heart">♥</div>
+            <div class="divider-line"></div>
         </div>
     </div>
 
@@ -1139,12 +1143,12 @@
         </div>
     </div>
 
-    <!-- DIVISÓRIA ELEGANTE 2 (agora com corações girando) -->
+    <!-- DIVISÓRIA ELEGANTE 2 -->
     <div class="section-divider">
         <div class="divider-content">
-            <div class="divider-heart">♥</div>
+            <div class="divider-line"></div>
             <div class="divider-ornament">✨</div>
-            <div class="divider-heart">♥</div>
+            <div class="divider-line"></div>
         </div>
     </div>
 
