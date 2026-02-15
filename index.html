@@ -3,20 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aniversário Romântico</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Aniversário Romântico - Isabelly</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="initial-page">
-        <div class="background"></div>
-        <div class="content">
-            <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
-            <button id="yes-button">SIM!</button>
+    <!-- Página Inicial -->
+    <div id="pagina-inicial" class="pagina">
+        <div class="fundo-imagem"></div>
+        <div class="overlay"></div>
+        <div class="conteudo">
+            <h1 class="titulo">Isabelly, você está preparada para ver o que fiz para você?</h1>
+            <div class="botao-container">
+                <button id="botao-sim" class="botao-sim">
+                    SIM!
+                    <!-- Elementos para animação de fogo e água -->
+                    <div class="orbita-fogo">
+                        <div class="elemento-fogo"></div>
+                        <div class="elemento-fogo"></div>
+                        <div class="elemento-fogo"></div>
+                    </div>
+                    <div class="orbita-agua">
+                        <div class="elemento-agua"></div>
+                        <div class="elemento-agua"></div>
+                        <div class="elemento-agua"></div>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
-    <div id="coming-soon" style="display: none;">
-        <h1>EM BREVE</h1>
+
+    <!-- Página EM BREVE -->
+    <div id="pagina-breve" class="pagina oculto">
+        <div class="conteudo-breve">
+            <h1>EM BREVE</h1>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
