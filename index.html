@@ -463,40 +463,76 @@
             }
         }
 
-        /* Transição 5: Fade com corações */
-        .hearts-divider {
+        /* Transição 5: Fade escuro com estrelas cadentes */
+        .stars-divider {
             position: relative;
-            height: 180px;
+            height: 150px;
             background: linear-gradient(180deg, 
-                #fff9fb 0%, 
-                rgba(255, 249, 251, 0.5) 50%,
+                #000000 0%,
+                #050608 30%,
                 #0a0c14 100%
             );
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
             overflow: hidden;
         }
 
-        .heart-icon {
-            font-size: 2rem;
-            animation: heartPulseFloat 2s infinite ease-in-out;
-            opacity: 0.7;
+        .stars-divider::before {
+            content: '✦';
+            position: absolute;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            animation: shootDown1 3s infinite;
+            left: 20%;
+            text-shadow: 0 0 10px white;
         }
 
-        .heart-icon:nth-child(1) { animation-delay: 0s; }
-        .heart-icon:nth-child(2) { animation-delay: 0.3s; }
-        .heart-icon:nth-child(3) { animation-delay: 0.6s; }
+        .stars-divider::after {
+            content: '★';
+            position: absolute;
+            font-size: 1.2rem;
+            color: rgba(255, 138, 174, 0.8);
+            opacity: 0;
+            animation: shootDown2 3s infinite;
+            left: 70%;
+            animation-delay: 1.5s;
+            text-shadow: 0 0 10px rgba(255, 138, 174, 0.8);
+        }
 
-        @keyframes heartPulseFloat {
-            0%, 100% {
-                transform: translateY(0) scale(1);
-                opacity: 0.4;
+        @keyframes shootDown1 {
+            0% {
+                top: -20px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
             }
-            50% {
-                transform: translateY(-10px) scale(1.2);
+            20% {
+                opacity: 1;
+            }
+            80% {
                 opacity: 0.8;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+                transform: translateX(40px) rotate(180deg);
+            }
+        }
+
+        @keyframes shootDown2 {
+            0% {
+                top: -20px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+                transform: translateX(-40px) rotate(-180deg);
             }
         }
 
@@ -1372,12 +1408,8 @@
         </div>
     </section>
 
-    <!-- TRANSIÇÃO 5: Fade com corações -->
-    <div class="hearts-divider">
-        <div class="heart-icon">💖</div>
-        <div class="heart-icon">💕</div>
-        <div class="heart-icon">💗</div>
-    </div>
+    <!-- TRANSIÇÃO 5: Fade escuro com estrelas cadentes -->
+    <div class="stars-divider"></div>
 
     <!-- FOOTER ESCURO -->
     <section class="footer-section">
@@ -1594,7 +1626,7 @@
         // ============= CONFETTI ON BUTTON CLICK =============
         document.querySelector('.heart-button').addEventListener('click', createConfetti);
 
-        // ============= ANIMAÇÃO EXTRA PARA AS PARTÍCULAS NAS TRANSIÇÕES =============
+        // ============= ANIMAÇÃO EXTRA PARA AS TRANSIÇÕES =============
         // Criar mais partículas flutuantes na transição de partículas
         const particlesDivider = document.querySelector('.particles-divider');
         if (particlesDivider) {
@@ -1609,6 +1641,26 @@
                 `;
                 extraParticle.textContent = i % 3 === 0 ? '✨' : (i % 3 === 1 ? '💖' : '⭐');
                 particlesDivider.appendChild(extraParticle);
+            }
+        }
+
+        // Adicionar estrelas cadentes extras à transição escura
+        const starsDivider = document.querySelector('.stars-divider');
+        if (starsDivider) {
+            for (let i = 0; i < 4; i++) {
+                const star = document.createElement('div');
+                star.style.cssText = `
+                    position: absolute;
+                    font-size: ${0.8 + Math.random() * 0.6}rem;
+                    color: ${i % 2 === 0 ? 'white' : 'rgba(255, 138, 174, 0.8)'};
+                    opacity: 0;
+                    animation: shootDown${i % 2 === 0 ? '1' : '2'} ${2.5 + Math.random()}s infinite;
+                    animation-delay: ${Math.random() * 3}s;
+                    left: ${10 + Math.random() * 80}%;
+                    text-shadow: 0 0 10px currentColor;
+                `;
+                star.textContent = i % 2 === 0 ? '✦' : '★';
+                starsDivider.appendChild(star);
             }
         }
     </script>
