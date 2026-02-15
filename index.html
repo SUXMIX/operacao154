@@ -1,244 +1,392 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Isabelly ❤️</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================
-   RESET E CONFIGURAÇÕES
-========================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body, html {
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-}
-
-/* =========================
-   TELA 1 - INTRO
-========================= */
-
-.section {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: opacity 1.2s ease, transform 1.2s ease;
-}
-
-.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(1.1);
-}
-
-/* Fundo com imagem + blur */
-.intro {
-    background: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg') center/cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Camada de blur + escurecimento */
-.intro::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(8px);
-    background: radial-gradient(circle at center, 
-        rgba(0,0,0,0.3) 40%, 
-        rgba(0,0,0,0.8) 100%);
-}
-
-/* Conteúdo central */
-.content {
-    position: relative;
-    text-align: center;
-    color: white;
-    padding: 20px;
-    max-width: 700px;
-    animation: fadeUp 1.5s ease forwards;
-}
-
-.content h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(28px, 4vw, 48px);
-    margin-bottom: 40px;
-    line-height: 1.4;
-    text-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-
-/* =========================
-   BOTÃO ROMÂNTICO
-========================= */
-
-.love-btn {
-    position: relative;
-    padding: 18px 60px;
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(45deg, #ff4e8a, #ff1f5a);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    box-shadow: 0 0 25px rgba(255, 78, 138, 0.6);
-}
-
-.love-btn:hover {
-    transform: scale(1.1);
-}
-
-/* Brilho animado */
-.love-btn::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 60%);
-    animation: rotateGlow 6s linear infinite;
-}
-
-/* Corações flutuando */
-.heart {
-    position: absolute;
-    font-size: 18px;
-    animation: float 3s linear infinite;
-    opacity: 0.8;
-}
-
-/* =========================
-   TELA 2 - EM BREVE
-========================= */
-
-.coming {
-    background: black;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(30px, 5vw, 60px);
-    letter-spacing: 5px;
-    font-weight: 600;
-}
-
-/* =========================
-   ANIMAÇÕES
-========================= */
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-    from {
-        transform: translateY(0) scale(1);
-        opacity: 1;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>💖 para Isabelly · aniversário 💖</title>
+  <!-- fontes românticas & elegantes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    to {
-        transform: translateY(-80px) scale(1.5);
-        opacity: 0;
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;           /* sem scroll, só telas cheias */
+      height: 100vh;
+      width: 100vw;
+      background-color: #110007;  /* fallback escuro */
     }
-}
 
-@keyframes rotateGlow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+    /* ----- PÁGINAS (transição suave) ----- */
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.7s cubic-bezier(0.4, 0.0, 0.2, 1), visibility 0.7s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-/* =========================
-   RESPONSIVO EXTRA
-========================= */
+    .page.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
-@media (max-width: 600px) {
+    /* ----- PÁGINA 1 – FUNDO COM FOTO ----- */
+    .page1 {
+      background-color: #1a0b0e;  /* tom quente por baixo */
+    }
+
+    /* camada da foto com desfoque */
+    .page1::before {
+      content: '';
+      position: absolute;
+      top: -5%;                   /* pequeno zoom pra evitar bordas claras */
+      left: -5%;
+      width: 110%;
+      height: 110%;
+      background-image: url('https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg');
+      background-size: cover;
+      background-position: center 30%;  /* ajuste fino para focar no rosto */
+      background-repeat: no-repeat;
+      filter: blur(10px) brightness(0.7);  /* desfoque + escurecimento geral */
+      z-index: 0;
+    }
+
+    /* overlay radial: bordas mais escuras, centro suave */
+    .page1 .dark-veil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 90%);
+      z-index: 1;
+      pointer-events: none;       /* não atrapalha cliques */
+    }
+
+    /* conteúdo principal da página 1 */
+    .content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      width: 90%;
+      padding: 1.5rem;
+      text-align: center;
+      color: white;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* título principal */
     .content h1 {
-        font-size: 24px;
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 10vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffe6f0, #ffd9e8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 120, 160, 0.5);
+      letter-spacing: 0.03em;
     }
-    .love-btn {
-        padding: 15px 40px;
-        font-size: 16px;
-    }
-}
 
-</style>
+    /* container do botão (para ajudar no posicionamento dos corações) */
+    .btn-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    /* botão principal */
+    .btn {
+      position: relative;
+      background: linear-gradient(145deg, #ff9bb3, #ff708d);
+      border: none;
+      border-radius: 60px;
+      padding: 1.2rem 3.5rem;
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 20px 35px rgba(255, 80, 120, 0.5), 0 5px 15px rgba(0,0,0,0.3), inset 0 -2px 5px rgba(255,255,255,0.3);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(4px);
+      overflow: visible;          /* corações podem sair do botão */
+      min-width: 250px;
+    }
+
+    /* texto do botão (acima dos corações) */
+    .btn-text {
+      position: relative;
+      z-index: 15;
+      display: inline-block;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 5px #b3003b;
+    }
+
+    /* efeito de clique */
+    .btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 10px 20px rgba(255, 60, 100, 0.6);
+    }
+
+    /* animação dos corações (keyframe) */
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-180px) rotate(35deg) scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    /* classe base para cada coração (estilos comuns) */
+    .heart {
+      position: absolute;
+      font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+      pointer-events: none;        /* não atrapalha clique */
+      z-index: 10;                 /* abaixo do texto (z-index 15) */
+      line-height: 1;
+      filter: drop-shadow(0 0 8px rgba(255, 200, 220, 0.9));
+      animation-name: floatHeart;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+      bottom: -10px;               /* ponto de partida (alguns serão ajustados via JS) */
+      left: 0;                     /* será sobrescrito por inline style */
+      will-change: transform, opacity;
+    }
+
+    /* ----- PÁGINA 2 (EM BREVE) ----- */
+    .page2 {
+      background: #0c0c0c;
+      color: white;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .coming-soon-content {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(4rem, 15vw, 8rem);
+      font-weight: 700;
+      background: linear-gradient(145deg, #eee, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(255, 200, 230, 0.4);
+      letter-spacing: 0.5rem;
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.9; text-shadow: 0 0 20px #ff99bb; }
+      100% { opacity: 1; text-shadow: 0 0 60px #ff4d7a, 0 0 20px #ffb3c6; }
+    }
+
+    /* pequeno texto extra para charme */
+    .subtle {
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      color: #aaa;
+      text-transform: uppercase;
+      border-top: 1px solid #333;
+      padding-top: 1.5rem;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    /* responsividade para celular: ajustes finos */
+    @media (max-width: 600px) {
+      .btn {
+        padding: 1rem 2.5rem;
+        min-width: 200px;
+      }
+      .content h1 {
+        margin-bottom: 2rem;
+      }
+      .coming-soon-content {
+        letter-spacing: 0.2rem;
+      }
+    }
+
+    /* para telas muito pequenas, garante que o botão seja legível */
+    @media (max-width: 380px) {
+      .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- TELA INTRO -->
-<section class="section intro" id="intro">
+  <!-- PÁGINA 1 - INICIAL (ativa por padrão) -->
+  <div class="page page1 active" id="page1">
+    <!-- véu escuro radial (bordas mais escuras) -->
+    <div class="dark-veil"></div>
     <div class="content">
-        <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
-        <button class="love-btn" id="loveBtn">SIM! 💖</button>
+      <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
+      <div class="btn-wrapper">
+        <button class="btn" id="btnSim">
+          <!-- texto do botão com z-index mais alto -->
+          <span class="btn-text">SIM!</span>
+          <!-- os corações serão inseridos aqui dinamicamente via JS -->
+        </button>
+      </div>
     </div>
-</section>
+  </div>
 
-<!-- TELA EM BREVE -->
-<section class="section coming hidden" id="coming">
-    EM BREVE
-</section>
+  <!-- PÁGINA 2 - EM BREVE (invisível inicialmente) -->
+  <div class="page page2" id="page2">
+    <div class="coming-soon-content">EM BREVE</div>
+    <div class="subtle">💘  Isabelly  💘</div>
+  </div>
 
-<script>
+  <script>
+    (function() {
+      // ========== CRIAÇÃO DOS CORAÇÕES FLUTUANTES (EFEITO FOFO) ==========
+      function createFloatingHearts() {
+        const button = document.getElementById('btnSim');
+        if (!button) return;
 
-/* =========================
-   BOTÃO + TRANSIÇÃO
-========================= */
+        // Remove corações antigos (se houver) para evitar duplicação
+        const oldHearts = button.querySelectorAll('.heart');
+        oldHearts.forEach(heart => heart.remove());
 
-const btn = document.getElementById("loveBtn");
-const intro = document.getElementById("intro");
-const coming = document.getElementById("coming");
+        // Número de corações: entre 20 e 30 para um efeito cheio mas não poluído
+        const heartCount = Math.floor(Math.random() * 15) + 25; // 25-40 corações
 
-btn.addEventListener("click", () => {
-    intro.classList.add("hidden");
+        for (let i = 0; i < heartCount; i++) {
+          // criar elemento coração
+          const heart = document.createElement('span');
+          heart.className = 'heart';
+          heart.innerHTML = '❤️'; // coração clássico, também pode usar outros: 💖, 💗, 💕, 💓
 
-    setTimeout(() => {
-        coming.classList.remove("hidden");
-    }, 1000);
-});
+          // --- estilos aleatórios para cada coração ---
+          
+          // posição horizontal (left) variada de 0% a 100%
+          const leftPos = Math.random() * 100; // %
+          heart.style.left = leftPos + '%';
 
-/* =========================
-   GERAR CORAÇÕES DINÂMICOS
-========================= */
+          // posição vertical de partida (bottom) entre -5px e 35px, para variar a altura de onde sobem
+          // valores negativos começam abaixo do botão, positivos dentro/ acima
+          const bottomStart = Math.random() * 40 - 10; // entre -10px e 30px
+          heart.style.bottom = bottomStart + 'px';
 
-btn.addEventListener("mouseenter", () => {
-    for(let i = 0; i < 10; i++){
-        const heart = document.createElement("span");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
+          // tamanho da fonte (variação)
+          const fontSize = 0.7 + Math.random() * 2.0; // entre 0.7rem e 2.7rem
+          heart.style.fontSize = fontSize + 'rem';
 
-        const size = Math.random() * 20 + 10;
-        heart.style.left = Math.random() * btn.offsetWidth + "px";
-        heart.style.top = btn.offsetHeight / 2 + "px";
-        heart.style.fontSize = size + "px";
-        heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+          // duração da animação (2s a 6s)
+          const duration = 2 + Math.random() * 5; // 2-7s
+          heart.style.animationDuration = duration + 's';
 
-        btn.appendChild(heart);
+          // delay da animação (0 a 2.5s)
+          const delay = Math.random() * 2.5;
+          heart.style.animationDelay = delay + 's';
 
-        setTimeout(() => {
-            heart.remove();
-        }, 3000);
+          // pequena rotação inicial aleatória (só pra estética)
+          const rotate = Math.random() * 30 - 15; // -15deg a 15deg
+          heart.style.transform = `rotate(${rotate}deg)`;
+
+          // opacidade pode variar um pouco no início
+          heart.style.opacity = 0.3 + Math.random() * 0.3;
+
+          // bônus: alguns corações especiais (💖, 💗, 💘) para diversificar
+          if (i % 5 === 0) heart.innerHTML = '💖';
+          if (i % 7 === 0) heart.innerHTML = '💗';
+          if (i % 9 === 0) heart.innerHTML = '💕';
+          if (i % 11 === 0) heart.innerHTML = '💘';
+
+          // adicionar coração ao botão
+          button.appendChild(heart);
+        }
+      }
+
+      // ========== TRANSIÇÃO ENTRE PÁGINAS ==========
+      function setupPageTransition() {
+        const btn = document.getElementById('btnSim');
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+
+        if (!btn || !page1 || !page2) return;
+
+        btn.addEventListener('click', function(e) {
+          e.preventDefault(); // não recarrega nada
+
+          // Desativa página 1, ativa página 2
+          page1.classList.remove('active');
+          page2.classList.add('active');
+
+          // Pequeno toque: vibrar se o navegador permitir (celular) - só pra tornar mais tátil
+          if (navigator.vibrate) {
+            navigator.vibrate(20); // vibração sutil
+          }
+        });
+      }
+
+      // ========== EXECUTAR APÓS O CARREGAMENTO DO DOM ==========
+      document.addEventListener('DOMContentLoaded', function() {
+        createFloatingHearts();   // gera corações únicos e animados
+        setupPageTransition();    // liga o clique ao botão
+
+        // (opcional) recriar corações se a janela for redimensionada?
+        // Não é necessário, mas se quiser, pode-se adicionar um listener com debounce.
+        // Por enquanto, os corações já estão lá e se adaptam ao tamanho.
+      });
+
+      // (opcional) caso queira que os corações sejam gerados novamente se a orientação mudar
+      // não é obrigatório, mas pode ajudar em mudanças extremas de layout.
+      // Vamos usar um evento de resize com debounce simples para recriar com novas dimensões
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          // recriar corações para se ajustarem melhor às novas proporções do botão
+          createFloatingHearts();
+        }, 200);
+      });
+
+    })();
+  </script>
+
+  <!-- (opcional) estilo adicional para microinterações: botão no hover (desktop) -->
+  <style>
+    /* só para desktop: efeito extra sem atrapalhar mobile */
+    @media (hover: hover) and (pointer: fine) {
+      .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 30px 45px rgba(255, 80, 130, 0.7), 0 5px 20px rgba(0,0,0,0.4), inset 0 -2px 8px #fff9;
+        background: linear-gradient(145deg, #ffadc2, #ff809e);
+      }
+      .btn:hover .heart {
+        /* pequeno efeito: os corações podem acelerar ou mudar de cor? sutil */
+        filter: drop-shadow(0 0 12px #ffb3d9);
+      }
     }
-});
-
-</script>
-
+  </style>
 </body>
 </html>
