@@ -22,7 +22,6 @@
             --text-dark: #2d1b2e;
             --gold: #e6c300;
             --deep-space: #0a0c14;
-            --wave-blue: #1a2a3a; /* azul escuro para onda do universo */
         }
 
         html {
@@ -86,8 +85,7 @@
             font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 900;
             color: #ffffff;
-            text-shadow: 0 4px 20px rgba(255, 138, 174, 0.6),
-                         0 0 40px rgba(255, 138, 174, 0.4);
+            text-shadow: 0 4px 20px rgba(255, 138, 174, 0.6), 0 0 40px rgba(255, 138, 174, 0.4);
             margin-bottom: 2rem;
             letter-spacing: 0.5px;
             line-height: 1.3;
@@ -126,7 +124,6 @@
             transform: scale(0.98);
         }
 
-        /* Corações flutuantes ao redor do botão */
         .floating-heart {
             position: absolute;
             font-size: 1.5rem;
@@ -135,61 +132,26 @@
             opacity: 0;
         }
 
-        .floating-heart:nth-child(1) {
-            top: -20px;
-            left: -30px;
-            animation-delay: 0s;
-        }
-
-        .floating-heart:nth-child(2) {
-            top: -25px;
-            right: -30px;
-            animation-delay: 0.5s;
-        }
-
-        .floating-heart:nth-child(3) {
-            bottom: -20px;
-            left: -25px;
-            animation-delay: 1s;
-        }
-
-        .floating-heart:nth-child(4) {
-            bottom: -25px;
-            right: -25px;
-            animation-delay: 1.5s;
-        }
-
-        .floating-heart:nth-child(5) {
-            top: 50%;
-            left: -40px;
-            animation-delay: 2s;
-        }
-
-        .floating-heart:nth-child(6) {
-            top: 50%;
-            right: -40px;
-            animation-delay: 2.5s;
-        }
+        .floating-heart:nth-child(1) { top: -20px; left: -30px; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { top: -25px; right: -30px; animation-delay: 0.5s; }
+        .floating-heart:nth-child(3) { bottom: -20px; left: -25px; animation-delay: 1s; }
+        .floating-heart:nth-child(4) { bottom: -25px; right: -25px; animation-delay: 1.5s; }
+        .floating-heart:nth-child(5) { top: 50%; left: -40px; animation-delay: 2s; }
+        .floating-heart:nth-child(6) { top: 50%; right: -40px; animation-delay: 2.5s; }
 
         @keyframes floatHeart {
-            0%, 100% {
-                opacity: 0;
-                transform: translateY(0) scale(0.5) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(-20px) scale(1) rotate(10deg);
-            }
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: translateY(-20px) scale(1) rotate(10deg); }
         }
 
-        /* ============= ONDAS ANIMADAS (ajustadas: maiores e sem fundo) ============= */
+        /* ============= ONDAS ANIMADAS (duas camadas iguais, trás mais escura) ============= */
         .wave-separator {
             position: relative;
             width: 100%;
-            height: 180px; /* aumentado para dar mais destaque */
+            height: 120px;
             overflow: hidden;
             line-height: 0;
-            background: transparent; /* garante que não haja fundo */
+            background: transparent;
         }
 
         .wave-separator svg {
@@ -201,25 +163,25 @@
             display: block;
         }
 
-        .wave-1 {
-            animation: wave 12s linear infinite;
+        /* Ambas ondas com mesmo path, mas fill diferente */
+        .wave-front {
+            animation: wave 10s linear infinite;
+            fill: var(--primary-pink); /* cor principal */
+            fill-opacity: 0.7;
         }
 
-        .wave-2 {
-            animation: wave 8s linear infinite;
-            opacity: 0.5;
+        .wave-back {
+            animation: wave 7s linear infinite;
+            fill: var(--dark-pink); /* mais escura */
+            fill-opacity: 0.5;
         }
 
         @keyframes wave {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        /* ============= SEÇÃO DA CARTA (texto maior e mais espaçoso) ============= */
+        /* ============= SEÇÃO DA CARTA (texto maior e mais largo) ============= */
         .letter-section {
             min-height: 100vh;
             display: flex;
@@ -234,10 +196,9 @@
             max-width: 900px; /* aumentado */
             width: 100%;
             background: #ffffff;
-            padding: 4rem 3.5rem; /* mais espaço nas laterais */
+            padding: 4rem 3.5rem; /* mais espaçamento interno */
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(178, 59, 107, 0.15),
-                        0 0 0 1px rgba(255, 138, 174, 0.2);
+            box-shadow: 0 20px 60px rgba(178, 59, 107, 0.15), 0 0 0 1px rgba(255, 138, 174, 0.2);
             position: relative;
             transform-style: preserve-3d;
             animation: letterReveal 1s ease-out;
@@ -260,13 +221,7 @@
             left: 0;
             right: 0;
             height: 30px;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 10px,
-                var(--light-pink) 10px,
-                var(--light-pink) 20px
-            );
+            background: repeating-linear-gradient(90deg, transparent, transparent 10px, var(--light-pink) 10px, var(--light-pink) 20px);
             border-radius: 30px 30px 0 0;
         }
 
@@ -275,7 +230,7 @@
             font-size: clamp(1.6rem, 3vw, 2.2rem); /* maior */
             color: var(--dark-pink);
             text-align: left;
-            line-height: 2; /* mais espaçamento */
+            line-height: 2;
             margin-top: 2rem;
             min-height: 200px;
             position: relative;
@@ -285,7 +240,7 @@
 
         .typing-cursor {
             display: inline-block;
-            width: 4px; /* mais grosso */
+            width: 4px;
             height: 2rem;
             background: var(--dark-pink);
             animation: blink 1s infinite;
@@ -294,23 +249,13 @@
         }
 
         @keyframes letterReveal {
-            from {
-                opacity: 0;
-                transform: translateY(50px) rotateX(10deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0);
-            }
+            from { opacity: 0; transform: translateY(50px) rotateX(10deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
         }
 
         @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(-10px);
-            }
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
         }
 
         @keyframes blink {
@@ -318,7 +263,7 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* ============= GALERIA DE FOTOS ============= */
+        /* ============= GALERIA ============= */
         .gallery-section {
             min-height: 100vh;
             padding: 5rem 2rem;
@@ -332,7 +277,6 @@
             text-align: center;
             color: var(--dark-pink);
             margin-bottom: 1rem; /* reduzido */
-            position: relative;
         }
 
         .gallery-title::after {
@@ -344,11 +288,10 @@
             animation: heartbeat 1.5s infinite;
         }
 
-        /* Instrução de clique */
         .gallery-sub {
             text-align: center;
             font-family: 'Crimson Text', serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--dark-pink);
             margin-bottom: 3rem;
             font-style: italic;
@@ -385,10 +328,7 @@
         }
 
         @keyframes revealPhoto {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .gallery-item:hover {
@@ -449,14 +389,8 @@
         }
 
         @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-image {
@@ -623,17 +557,11 @@
         }
 
         @keyframes twinkle {
-            0%, 100% {
-                text-shadow: 0 4px 30px rgba(255, 138, 174, 0.8),
-                             0 0 20px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                text-shadow: 0 4px 30px rgba(255, 138, 174, 1),
-                             0 0 40px rgba(255, 255, 255, 0.8);
-            }
+            0%, 100% { text-shadow: 0 4px 30px rgba(255, 138, 174, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 4px 30px rgba(255, 138, 174, 1), 0 0 40px rgba(255, 255, 255, 0.8); }
         }
 
-        /* ============= FOOTER (fundo escuro) ============= */
+        /* ============= FOOTER ESCURO ============= */
         .footer-section {
             padding: 4rem 2rem;
             background: var(--deep-space);
@@ -679,64 +607,23 @@
 
         /* ============= RESPONSIVO ============= */
         @media (max-width: 768px) {
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px !important;
-            }
-
-            .timeline-content::before {
-                left: -50px !important;
-                right: auto !important;
-            }
-
-            .wave-separator {
-                height: 120px; /* um pouco menor no mobile, mas ainda maior */
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .modal-close {
-                top: 1rem;
-                right: 1rem;
-                font-size: 2.5rem;
-            }
-
-            .letter-container {
-                padding: 3rem 2rem; /* ajuste para telas pequenas */
-            }
+            .timeline::before { left: 20px; }
+            .timeline-content { width: calc(100% - 60px); margin-left: 60px !important; }
+            .timeline-content::before { left: -50px !important; right: auto !important; }
+            .wave-separator { height: 80px; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .modal-close { top: 1rem; right: 1rem; font-size: 2.5rem; }
+            .letter-container { padding: 2.5rem 1.8rem; } /* ajuste mobile */
         }
 
-        /* ============= ANIMAÇÕES GLOBAIS ============= */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Scroll reveal */
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
-
         .scroll-reveal.visible {
             opacity: 1;
             transform: translateY(0);
@@ -744,7 +631,6 @@
     </style>
 </head>
 <body>
-    <!-- SEÇÃO HERO -->
     <section class="hero-section" id="hero">
         <div class="hero-background"></div>
         <div class="hero-vignette"></div>
@@ -762,11 +648,11 @@
         </div>
     </section>
 
-    <!-- ONDAS SEPARADORAS (hero -> carta) - MAIORES -->
+    <!-- ONDAS (hero -> carta) com duas camadas iguais, trás mais escura -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 180" preserveAspectRatio="none"> <!-- altura 180 -->
-            <path class="wave-1" fill="#ff8aae" fill-opacity="0.6" d="M0,80 Q300,130 600,80 T1200,80 L1200,180 L0,180 Z M1200,80 Q1500,130 1800,80 T2400,80 L2400,180 L1200,180 Z"></path>
-            <path class="wave-2" fill="#b23b6b" fill-opacity="0.4" d="M0,110 Q300,70 600,110 T1200,110 L1200,180 L0,180 Z M1200,110 Q1500,70 1800,110 T2400,110 L2400,180 L1200,180 Z"></path>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-back" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
+            <path class="wave-front" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
         </svg>
     </div>
 
@@ -777,35 +663,31 @@
         </div>
     </section>
 
-    <!-- ONDAS SEPARADORAS (carta -> galeria) -->
+    <!-- ONDAS (carta -> galeria) -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
-            <path class="wave-1" fill="#ff8aae" fill-opacity="0.6" d="M0,80 Q300,30 600,80 T1200,80 L1200,0 L0,0 Z M1200,80 Q1500,30 1800,80 T2400,80 L2400,0 L1200,0 Z"></path>
-            <path class="wave-2" fill="#b23b6b" fill-opacity="0.4" d="M0,110 Q300,160 600,110 T1200,110 L1200,0 L0,0 Z M1200,110 Q1500,160 1800,110 T2400,110 L2400,0 L1200,0 Z"></path>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-back" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
+            <path class="wave-front" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
         </svg>
     </div>
 
     <!-- GALERIA -->
     <section class="gallery-section" id="gallery">
         <h2 class="gallery-title scroll-reveal">Momentos</h2>
-        <div class="gallery-sub">(clique em cada foto para ver a descrição)</div>
+        <div class="gallery-sub scroll-reveal">(clique nas fotos para ver as descrições)</div>
         <div class="gallery-grid">
-            <!-- Foto 1: ela sozinha -->
             <div class="gallery-item" data-description="Simplesmente a moça mais linda. Isabelly, você brilha até sem filtro! ✨">
                 <img src="https://i.ibb.co/zhD43kKk/IMG-20250905-WA0019.jpg" alt="Isabelly sozinha">
                 <div class="gallery-frame"></div>
             </div>
-            <!-- Foto 2: nós no lab de química -->
             <div class="gallery-item" data-description="Nossa parceria no lab de química. Até as reações ficam mais bonitas ao seu lado. 💕">
                 <img src="https://i.ibb.co/KzWN2HHj/IMG-20251216-WA0042.jpg" alt="Nós no laboratório">
                 <div class="gallery-frame"></div>
             </div>
-            <!-- Foto 3: meu aniversário surpresa -->
             <div class="gallery-item" data-description="Meu aniversário surpresa! Você fez tudo por mim, e eu nunca vou esquecer. 🎂">
                 <img src="https://i.ibb.co/4w736ZNb/IMG-20260129-WA0010.jpg" alt="Aniversário do Vitor">
                 <div class="gallery-frame"></div>
             </div>
-            <!-- Foto 4: nós com pôster de livro -->
             <div class="gallery-item" data-description="Lançamento do livro – mais um momento cultural ao lado da minha companheira favorita. 📚">
                 <img src="https://i.ibb.co/wFxc8v41/20251203-115328.jpg" alt="Nós com pôster de livro">
                 <div class="gallery-frame"></div>
@@ -813,7 +695,7 @@
         </div>
     </section>
 
-    <!-- Modal da Galeria -->
+    <!-- Modal -->
     <div class="modal" id="photoModal">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <div class="modal-content">
@@ -822,11 +704,11 @@
         </div>
     </div>
 
-    <!-- ONDAS SEPARADORAS (galeria -> timeline) -->
+    <!-- ONDAS (galeria -> timeline) -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
-            <path class="wave-1" fill="#b23b6b" fill-opacity="0.6" d="M0,80 Q300,130 600,80 T1200,80 L1200,180 L0,180 Z M1200,80 Q1500,130 1800,80 T2400,80 L2400,180 L1200,180 Z"></path>
-            <path class="wave-2" fill="#ff8aae" fill-opacity="0.4" d="M0,110 Q300,70 600,110 T1200,110 L1200,180 L0,180 Z M1200,110 Q1500,70 1800,110 T2400,110 L2400,180 L1200,180 Z"></path>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-back" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
+            <path class="wave-front" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
         </svg>
     </div>
 
@@ -834,53 +716,25 @@
     <section class="timeline-section" id="timeline">
         <h2 class="timeline-title scroll-reveal">Tudo Sobre Você</h2>
         <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Você é a moça mais bonita que já vi.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Você é a moça mais engraçada que já conheci.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Você é a moça mais incrível que já conversei.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Você é a moça mais brava que existe nesse mundo.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Você também é a moça mais fofa.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Você é a moça mais fogo, enquanto eu sou o moço mais água.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <p class="timeline-text">Enfim, feliz aniversário, meu bem! Que Deus te proteja, guarde, ilumine, abençoe e guie. Que seus próximos anos sejam maravilhosos e que nesses dias você ganhe as lutas diárias contra os demônios que há nesta vida. Que você seja essa pessoa alegre, divertida, legal, inteligente, sagaz, impressionante pelo resto de sua vida. E como sempre digo, saiba que te amo muito.</p>
-                </div>
-            </div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Você é a moça mais bonita que já vi.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Você é a moça mais engraçada que já conheci.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Você é a moça mais incrível que já conversei.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Você é a moça mais brava que existe nesse mundo.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Você também é a moça mais fofa.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Você é a moça mais fogo, enquanto eu sou o moço mais água.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><p class="timeline-text">Enfim, feliz aniversário, meu bem! Que Deus te proteja, guarde, ilumine, abençoe e guie. Que seus próximos anos sejam maravilhosos e que nesses dias você ganhe as lutas diárias contra os demônios que há nesta vida. Que você seja essa pessoa alegre, divertida, legal, inteligente, sagaz, impressionante pelo resto de sua vida. E como sempre digo, saiba que te amo muito.</p></div></div>
         </div>
     </section>
 
-    <!-- ONDAS SEPARADORAS (timeline -> universo) - agora em azul escuro -->
+    <!-- ONDAS (timeline -> universo) -->
     <div class="wave-separator">
-        <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
-            <path class="wave-1" fill="#1a2a3a" fill-opacity="0.7" d="M0,80 Q300,30 600,80 T1200,80 L1200,0 L0,0 Z M1200,80 Q1500,30 1800,80 T2400,80 L2400,0 L1200,0 Z"></path>
-            <path class="wave-2" fill="#0a0c14" fill-opacity="0.5" d="M0,110 Q300,160 600,110 T1200,110 L1200,0 L0,0 Z M1200,110 Q1500,160 1800,110 T2400,110 L2400,0 L1200,0 Z"></path>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-back" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
+            <path class="wave-front" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
         </svg>
     </div>
 
-    <!-- SEÇÃO DO UNIVERSO -->
+    <!-- UNIVERSO -->
     <section class="universe-section">
         <div class="universe-background"></div>
         <div class="universe-content">
@@ -888,7 +742,7 @@
         </div>
     </section>
 
-    <!-- FOOTER escuro -->
+    <!-- FOOTER ESCURO -->
     <section class="footer-section">
         <div class="author-container">
             <img class="author-photo" src="https://i.ibb.co/fY1sZk6f/20260105-121313.jpg" alt="Vitor da Costa">
@@ -897,148 +751,81 @@
     </section>
 
     <script>
-        // ============= SCROLL TO LETTER =============
         function scrollToLetter() {
-            const letterSection = document.getElementById('letter');
-            letterSection.scrollIntoView({ behavior: 'smooth' });
-            
-            // Iniciar efeito de digitação após um pequeno delay
-            setTimeout(() => {
-                typeWriter();
-            }, 800);
+            document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(typeWriter, 800);
         }
 
-        // ============= EFEITO DE DIGITAÇÃO (texto completo) =============
         const letterMessage = "Querida Isabelly: neste dia, 18/02, comemoramos o dia do seu aniversário. Quero lhe dizer que sou grato por tudo que fez para mim e por mim, por todas as coisas mesmo. Além disso, quero também dizer que a amo profundamente. Desejo a ti um ótimo dia, mais além, desejo que venha excelentes anos para você, anos abençoados, anos de felicidade e anos de muito sucesso. Que Deus te abençoe grandemente, lhe guie, lhe dê sabedoria, juízo e mais conhecimento. Vejo que és uma pessoa de muitas virtudes, és uma pessoa esforçada e dedicada, és uma pessoa que defende a ética, és uma pessoa que segue a fé como nunca vi antes; e pela primeira vez, após Deus e minha família, és a pessoa que mais amo. Espero que siga assim, nessa sua forma impressionantemente brilhante de ser. Enfim, fique com Deus!";
-        let i = 0;
-        let typingStarted = false;
+        let i = 0, typingStarted = false;
 
         function typeWriter() {
             if (typingStarted) return;
             typingStarted = true;
-            
             const letterText = document.getElementById('letterText');
             letterText.innerHTML = '';
-            
             function type() {
                 if (i < letterMessage.length) {
                     letterText.innerHTML += letterMessage.charAt(i);
                     i++;
-                    setTimeout(type, 50);
+                    setTimeout(type, 40);
                 } else {
                     letterText.innerHTML += '<span class="typing-cursor"></span>';
                 }
             }
-            
             type();
         }
 
-        // ============= SCROLL REVEAL ANIMATION =============
         function revealOnScroll() {
-            const reveals = document.querySelectorAll('.scroll-reveal, .gallery-item, .timeline-item');
-            
-            reveals.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
+            document.querySelectorAll('.scroll-reveal, .gallery-item, .timeline-item').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('visible');
             });
         }
-
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // ============= GALERIA MODAL =============
-        const galleryItems = document.querySelectorAll('.gallery-item');
+        // Galeria modal
         const modal = document.getElementById('photoModal');
         const modalImage = document.getElementById('modalImage');
         const modalDescription = document.getElementById('modalDescription');
-
-        galleryItems.forEach(item => {
+        document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', function() {
-                const img = this.querySelector('img');
-                const description = this.getAttribute('data-description');
-                
-                modalImage.src = img.src;
-                modalDescription.textContent = description;
+                modalImage.src = this.querySelector('img').src;
+                modalDescription.textContent = this.getAttribute('data-description');
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
         });
-
         function closeModal() {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
+        // Corações no botão
+        document.querySelector('.heart-button').addEventListener('mouseenter', () => {
+            document.querySelectorAll('.floating-heart').forEach(h => h.style.animationPlayState = 'running');
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+        // Parallax hero
+        window.addEventListener('scroll', () => {
+            document.querySelector('.hero-background').style.transform = `scale(1.1) translateY(${window.pageYOffset * 0.5}px)`;
         });
 
-        // ============= ANIMAÇÃO DOS CORAÇÕES NO BOTÃO =============
-        const heartButton = document.querySelector('.heart-button');
-        
-        heartButton.addEventListener('mouseenter', function() {
-            const hearts = document.querySelectorAll('.floating-heart');
-            hearts.forEach(heart => {
-                heart.style.animationPlayState = 'running';
-            });
-        });
-
-        // ============= PARALLAX SUAVE NO HERO =============
-        window.addEventListener('scroll', function() {
-            const heroBackground = document.querySelector('.hero-background');
-            const scrolled = window.pageYOffset;
-            heroBackground.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
-        });
-
-        // ============= ESTRELAS CADENTES =============
+        // Estrelas cadentes
         function createShootingStar() {
-            const universeSection = document.querySelector('.universe-section');
             const star = document.createElement('div');
-            star.style.position = 'absolute';
-            star.style.width = '2px';
-            star.style.height = '2px';
-            star.style.background = 'white';
-            star.style.borderRadius = '50%';
-            star.style.boxShadow = '0 0 6px 2px white';
+            star.style.cssText = 'position:absolute; width:2px; height:2px; background:white; border-radius:50%; box-shadow:0 0 6px 2px white; z-index:2;';
             star.style.top = Math.random() * 50 + '%';
             star.style.left = Math.random() * 100 + '%';
-            star.style.zIndex = '2';
             star.style.animation = 'shootingStar 2s linear forwards';
-            
-            universeSection.appendChild(star);
-            
-            setTimeout(() => {
-                star.remove();
-            }, 2000);
+            document.querySelector('.universe-section').appendChild(star);
+            setTimeout(() => star.remove(), 2000);
         }
-
         const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shootingStar {
-                0% {
-                    transform: translateX(0) translateY(0);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateX(-200px) translateY(200px);
-                    opacity: 0;
-                }
-            }
-        `;
+        style.textContent = `@keyframes shootingStar{0%{transform:translateX(0) translateY(0); opacity:1}100%{transform:translateX(-200px) translateY(200px); opacity:0}}`;
         document.head.appendChild(style);
-
         setInterval(createShootingStar, 3000);
     </script>
 </body>
