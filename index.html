@@ -1,42 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Aniversário, Isabelly! 💖</title>
+    <title>Feliz Aniversário, Isabelly! 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        /* ===== RESET E ESTILOS GLOBAIS ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            color: #fff;
-            background-color: #1a1a2e;
+        :root {
+            --primary-pink: #ff6b9d;
+            --dark-pink: #c44569;
+            --light-pink: #ffd5e5;
+            --cream: #fff5f7;
+            --text-dark: #2d1b2e;
+            --gold: #d4af37;
         }
 
-        h1, h2, h3 {
-            font-weight: 400;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ===== SCROLL SUAVE ===== */
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* ===== SEÇÃO 1: HERO COM FOTO DE FUNDO ===== */
-        .hero {
+        body {
+            font-family: 'Crimson Text', serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ============= SEÇÃO HERO ============= */
+        .hero-section {
             position: relative;
-            width: 100%;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -44,9 +45,10 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(196, 69, 105, 0.3));
         }
 
-        .hero-bg {
+        .hero-background {
             position: absolute;
             top: 0;
             left: 0;
@@ -56,576 +58,956 @@
             background-size: cover;
             background-position: center;
             filter: blur(8px) brightness(0.5);
-            transform: scale(1.1); /* Evita bordas claras no blur */
-            z-index: -2;
+            transform: scale(1.1);
+            z-index: 1;
         }
 
-        .hero-overlay {
+        .hero-vignette {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%);
-            z-index: -1;
+            background: radial-gradient(ellipse at center, transparent 20%, rgba(45, 27, 46, 0.7) 100%);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
-            padding: 20px;
+            z-index: 3;
+            padding: 2rem;
+            animation: fadeInUp 1.5s ease-out;
         }
 
-        .hero h1 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-            max-width: 800px;
-            font-weight: 600;
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(255, 107, 157, 0.6),
+                         0 0 40px rgba(255, 107, 157, 0.4);
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
         }
 
-        /* Botão animado com corações */
-        .btn-heart {
-            background: linear-gradient(45deg, #ff3366, #ff6b6b);
-            border: none;
-            color: white;
-            padding: 18px 40px;
+        /* Botão com corações animados */
+        .heart-button-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        .heart-button {
+            position: relative;
+            padding: 1.2rem 3rem;
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.4);
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            outline: none;
+            z-index: 10;
+            overflow: visible;
         }
 
-        .btn-heart:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(255, 51, 102, 0.6);
+        .heart-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 15px 50px rgba(255, 107, 157, 0.7);
         }
 
-        .btn-heart::before {
-            content: "❤️";
+        .heart-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Corações flutuantes ao redor do botão */
+        .floating-heart {
             position: absolute;
+            font-size: 1.5rem;
+            animation: floatHeart 3s infinite ease-in-out;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .floating-heart:nth-child(1) {
+            top: -20px;
             left: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.8rem;
-            opacity: 0;
-            transition: left 0.4s ease, opacity 0.3s ease;
+            animation-delay: 0s;
         }
 
-        .btn-heart::after {
-            content: "❤️";
-            position: absolute;
+        .floating-heart:nth-child(2) {
+            top: -25px;
             right: -30px;
+            animation-delay: 0.5s;
+        }
+
+        .floating-heart:nth-child(3) {
+            bottom: -20px;
+            left: -25px;
+            animation-delay: 1s;
+        }
+
+        .floating-heart:nth-child(4) {
+            bottom: -25px;
+            right: -25px;
+            animation-delay: 1.5s;
+        }
+
+        .floating-heart:nth-child(5) {
             top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.8rem;
-            opacity: 0;
-            transition: right 0.4s ease, opacity 0.3s ease;
+            left: -40px;
+            animation-delay: 2s;
         }
 
-        .btn-heart:hover::before {
-            left: 10px;
-            opacity: 1;
+        .floating-heart:nth-child(6) {
+            top: 50%;
+            right: -40px;
+            animation-delay: 2.5s;
         }
 
-        .btn-heart:hover::after {
-            right: 10px;
-            opacity: 1;
+        @keyframes floatHeart {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1) rotate(10deg);
+            }
         }
 
-        .btn-heart:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== ONDAS ===== */
-        .wave-section {
+        /* ============= ONDAS ANIMADAS ============= */
+        .wave-separator {
             position: relative;
-            background: #ffb6c1; /* Rosa claro */
+            width: 100%;
+            height: 150px;
             overflow: hidden;
+            line-height: 0;
         }
 
-        .wave {
+        .wave-separator svg {
             position: absolute;
-            top: -100px;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 100px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffb6c1" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,165.3C672,160,768,192,864,208C960,224,1056,224,1152,202.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
-            background-size: cover;
-            animation: wave 8s infinite linear;
-            z-index: 2;
+            height: 100%;
+        }
+
+        .wave-1 {
+            animation: wave 8s linear infinite;
+        }
+
+        .wave-2 {
+            animation: wave 6s linear infinite;
+            opacity: 0.5;
         }
 
         @keyframes wave {
-            0% { transform: translateX(0) translateY(0); }
-            50% { transform: translateX(-25px) translateY(5px); }
-            100% { transform: translateX(0) translateY(0); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
-        /* ===== CARTINHA COM EFEITO DIGITAÇÃO ===== */
+        /* ============= SEÇÃO DA CARTA ============= */
         .letter-section {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px 20px;
-            background: #ffb6c1;
-        }
-
-        .letter-card {
-            background: #fff0f5;
-            max-width: 800px;
-            width: 100%;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, var(--cream) 0%, #fff0f5 100%);
             position: relative;
-            transform: rotate(-2deg);
-            transition: transform 0.3s ease;
-            border: 2px solid #ff99aa;
-            color: #333;
         }
 
-        .letter-card:hover {
-            transform: rotate(0deg) scale(1.02);
+        .letter-container {
+            max-width: 700px;
+            background: #ffffff;
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(196, 69, 105, 0.15),
+                        0 0 0 1px rgba(255, 107, 157, 0.1);
+            position: relative;
+            transform-style: preserve-3d;
+            animation: letterReveal 1s ease-out;
         }
 
-        .letter-card::before {
-            content: "✉️";
+        .letter-container::before {
+            content: '💌';
             position: absolute;
-            top: -20px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 3rem;
-            background: #ffb6c1;
-            padding: 10px 20px;
-            border-radius: 50px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            font-size: 4rem;
+            animation: bounce 2s infinite;
         }
 
-        .typewriter {
-            font-size: 2rem;
-            font-family: 'Courier New', monospace;
+        .letter-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10px,
+                var(--light-pink) 10px,
+                var(--light-pink) 20px
+            );
+            border-radius: 20px 20px 0 0;
+        }
+
+        .letter-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--dark-pink);
             text-align: center;
-            color: #d44e6c;
-            border-right: 3px solid #d44e6c;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 3s steps(10, end) forwards, blink 0.75s step-end infinite;
-            margin: 20px auto;
+            line-height: 1.8;
+            margin-top: 2rem;
+            min-height: 60px;
+            position: relative;
         }
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.5rem;
+            background: var(--dark-pink);
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes letterReveal {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
         }
 
         @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: #d44e6c; }
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
-        /* ===== GALERIA COM LIGHTBOX ===== */
+        /* ============= GALERIA DE FOTOS ============= */
         .gallery-section {
-            padding: 80px 20px;
-            background: #ffe4e1;
-            text-align: center;
-            color: #333;
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            background: var(--cream);
         }
 
         .gallery-title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: #a64d79;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            text-align: center;
+            color: var(--dark-pink);
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .gallery-title::after {
+            content: '♥';
+            display: block;
+            font-size: 2rem;
+            color: var(--primary-pink);
+            margin-top: 1rem;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .gallery-item {
             position: relative;
+            aspect-ratio: 1;
             overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 20px;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 1/1;
-            background: #ddd;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .gallery-item.visible {
+            animation: revealPhoto 0.8s ease-out forwards;
+        }
+
+        @keyframes revealPhoto {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(196, 69, 105, 0.3);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            transition: transform 0.4s ease;
         }
 
         .gallery-item:hover img {
             transform: scale(1.1);
         }
 
-        /* Lightbox */
-        .lightbox {
+        .gallery-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 12px solid #ffffff;
+            border-radius: 20px;
+            pointer-events: none;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal da Galeria */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            padding: 20px;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
         }
 
-        .lightbox.active {
+        .modal.active {
             display: flex;
         }
 
-        .lightbox-img {
-            max-width: 90%;
+        .modal-content {
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-image {
+            max-width: 100%;
             max-height: 70vh;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
         }
 
-        .lightbox-caption {
-            margin-top: 20px;
-            color: white;
-            font-size: 1.2rem;
+        .modal-description {
+            margin-top: 2rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            color: #ffffff;
             text-align: center;
+            max-width: 600px;
+            line-height: 1.6;
         }
 
-        .lightbox-close {
+        .modal-close {
             position: absolute;
-            top: 20px;
-            right: 30px;
+            top: 2rem;
+            right: 2rem;
             font-size: 3rem;
-            color: white;
+            color: #ffffff;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        /* ===== LINHA DO TEMPO ===== */
+        .modal-close:hover {
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        /* ============= LINHA DO TEMPO ============= */
         .timeline-section {
-            padding: 80px 20px;
-            background: #f8d7da;
-            color: #333;
-            text-align: center;
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--cream) 0%, #ffe0ec 100%);
+            position: relative;
         }
 
         .timeline-title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: #b24c6b;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            text-align: center;
+            color: var(--dark-pink);
+            margin-bottom: 4rem;
         }
 
         .timeline {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-pink), var(--dark-pink));
+            border-radius: 2px;
         }
 
         .timeline-item {
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(5px);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-            border-left: 5px solid #ff6b6b;
-            text-align: left;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-            background: rgba(255,255,255,0.9);
-        }
-
-        /* ===== SEÇÃO UNIVERSO ===== */
-        .universe-section {
             position: relative;
-            height: 100vh;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(196, 69, 105, 0.2);
+            position: relative;
+            width: calc(50% - 50px);
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 50px);
+        }
+
+        .timeline-content::before {
+            content: '💗';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: auto;
+            left: -60px;
+        }
+
+        .timeline-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* ============= SEÇÃO DO UNIVERSO ============= */
+        .universe-section {
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
+            position: relative;
             overflow: hidden;
+            padding: 2rem;
         }
 
-        .universe-bg {
+        .universe-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://stsci-opo.org/STScI-01G8H1N7Z8JY3ZQZQZQZQZQZQ.jpg'); /* James Webb */
+            background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600'); /* James Webb style */
             background-size: cover;
             background-position: center;
             filter: brightness(0.4);
-            z-index: -2;
+            z-index: 1;
         }
 
         .universe-content {
             position: relative;
-            z-index: 1;
-            padding: 20px;
-        }
-
-        .universe-content h2 {
-            font-size: 2.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
-        }
-
-        /* ===== SEÇÃO AUTOR ===== */
-        .author-section {
-            padding: 80px 20px;
-            background: #1a1a2e;
+            z-index: 2;
             text-align: center;
-            color: white;
+        }
+
+        .universe-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 4px 30px rgba(255, 107, 157, 0.8);
+            line-height: 1.4;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                text-shadow: 0 4px 30px rgba(255, 107, 157, 0.8),
+                             0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 4px 30px rgba(255, 107, 157, 1),
+                             0 0 40px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        /* ============= FOOTER ============= */
+        .footer-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, #ffe0ec 0%, var(--light-pink) 100%);
+            text-align: center;
+        }
+
+        .author-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         .author-photo {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid #ff99aa;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+            border: 5px solid #ffffff;
+            box-shadow: 0 10px 40px rgba(196, 69, 105, 0.3);
+            transition: transform 0.3s ease;
         }
 
-        .author-section p {
+        .author-photo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .author-text {
+            font-family: 'Crimson Text', serif;
             font-size: 1.5rem;
+            color: var(--dark-pink);
+            font-style: italic;
         }
 
-        /* ===== RESPONSIVIDADE ===== */
+        /* ============= RESPONSIVO ============= */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.5rem;
-                padding: 0 20px;
+            .timeline::before {
+                left: 20px;
             }
 
-            .btn-heart {
-                padding: 15px 30px;
-                font-size: 1.2rem;
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
             }
 
-            .typewriter {
-                font-size: 1.5rem;
+            .timeline-content::before {
+                left: -50px !important;
+                right: auto !important;
             }
 
-            .letter-card {
-                padding: 30px 15px;
+            .wave-separator {
+                height: 100px;
             }
 
-            .gallery-title {
-                font-size: 2rem;
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .timeline-item {
-                font-size: 1rem;
-            }
-
-            .universe-content h2 {
-                font-size: 1.8rem;
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+                font-size: 2.5rem;
             }
         }
 
-        /* Animações de scroll */
-        .fade-in {
+        /* ============= ANIMAÇÕES GLOBAIS ============= */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll reveal */
+        .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .fade-in.visible {
+        .scroll-reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
-    <!-- Fonte Poppins do Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- SEÇÃO 1: HERO -->
-    <section class="hero" id="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
+    <!-- SEÇÃO HERO -->
+    <section class="hero-section" id="hero">
+        <div class="hero-background"></div>
+        <div class="hero-vignette"></div>
         <div class="hero-content">
-            <h1>Isabelly, você está preparada para ver o que fiz para você?</h1>
-            <button class="btn-heart" id="scrollButton">SIM!</button>
+            <h1 class="hero-title">Isabelly, você está preparada para ver o que fiz para você?</h1>
+            <div class="heart-button-container">
+                <span class="floating-heart">💖</span>
+                <span class="floating-heart">💕</span>
+                <span class="floating-heart">💗</span>
+                <span class="floating-heart">💝</span>
+                <span class="floating-heart">💖</span>
+                <span class="floating-heart">💕</span>
+                <button class="heart-button" onclick="scrollToLetter()">SIM!</button>
+            </div>
         </div>
     </section>
 
-    <!-- ONDA (transição) -->
-    <div class="wave-section" style="height: 100px; background: transparent;">
-        <div class="wave"></div>
+    <!-- ONDAS SEPARADORAS (primeira) -->
+    <div class="wave-separator">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-1" fill="#ff6b9d" fill-opacity="0.7" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
+            <path class="wave-2" fill="#c44569" fill-opacity="0.5" d="M0,70 Q300,20 600,70 T1200,70 L1200,120 L0,120 Z M1200,70 Q1500,20 1800,70 T2400,70 L2400,120 L1200,120 Z"></path>
+        </svg>
     </div>
 
-    <!-- SEÇÃO 2: CARTINHA -->
-    <section class="letter-section fade-in" id="letter">
-        <div class="letter-card">
-            <div class="typewriter">EM BREVE</div>
-            <p style="text-align: center; margin-top: 20px; color: #b24c6b;">❤️</p>
+    <!-- SEÇÃO DA CARTA -->
+    <section class="letter-section" id="letter">
+        <div class="letter-container scroll-reveal">
+            <div class="letter-text" id="letterText"></div>
         </div>
     </section>
 
-    <!-- ONDA (transição) -->
-    <div class="wave-section" style="height: 100px; background: #ffb6c1;">
-        <div class="wave" style="top: -100px; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1440 320\"><path fill=\"%23ffe4e1\" fill-opacity=\"1\" d=\"M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,165.3C672,160,768,192,864,208C960,224,1056,224,1152,202.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z\"></path></svg>') no-repeat; background-size: cover;"></div>
+    <!-- ONDAS SEPARADORAS (segunda) -->
+    <div class="wave-separator">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-1" fill="#ff6b9d" fill-opacity="0.7" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
+            <path class="wave-2" fill="#c44569" fill-opacity="0.5" d="M0,70 Q300,120 600,70 T1200,70 L1200,0 L0,0 Z M1200,70 Q1500,120 1800,70 T2400,70 L2400,0 L1200,0 Z"></path>
+        </svg>
     </div>
 
-    <!-- SEÇÃO 3: GALERIA -->
-    <section class="gallery-section fade-in" id="gallery">
-        <h2 class="gallery-title">Nossos Momentos</h2>
+    <!-- GALERIA -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="gallery-title scroll-reveal">Nossos Momentos</h2>
         <div class="gallery-grid">
-            <!-- Fotos placeholder - substitua pelos links reais -->
-            <div class="gallery-item" data-src="https://picsum.photos/800/800?random=1" data-caption="Primeiro encontro">
-                <img src="https://picsum.photos/400/400?random=1" alt="Foto 1">
+            <div class="gallery-item" data-description="Este foi um dos dias mais especiais que passamos juntos. Seu sorriso ilumina qualquer lugar! ✨">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600" alt="Momento especial 1">
+                <div class="gallery-frame"></div>
             </div>
-            <div class="gallery-item" data-src="https://picsum.photos/800/800?random=2" data-caption="Viagem inesquecível">
-                <img src="https://picsum.photos/400/400?random=2" alt="Foto 2">
+            <div class="gallery-item" data-description="Lembro de cada detalhe deste momento. Você estava tão linda neste dia! 💕">
+                <img src="https://images.unsplash.com/photo-1522673607710-83d5a9322114?w=600" alt="Momento especial 2">
+                <div class="gallery-frame"></div>
             </div>
-            <div class="gallery-item" data-src="https://picsum.photos/800/800?random=3" data-caption="Dia especial">
-                <img src="https://picsum.photos/400/400?random=3" alt="Foto 3">
+            <div class="gallery-item" data-description="Essa risada sua é a coisa mais contagiante do mundo. Adoro te ver feliz! 😊">
+                <img src="https://images.unsplash.com/photo-1605185437504-f2adbd86d11d?w=600" alt="Momento especial 3">
+                <div class="gallery-frame"></div>
             </div>
-            <div class="gallery-item" data-src="https://picsum.photos/800/800?random=4" data-caption="Nosso amor">
-                <img src="https://picsum.photos/400/400?random=4" alt="Foto 4">
+            <div class="gallery-item" data-description="Cada segundo ao seu lado é um presente. Obrigado por existir! 💖">
+                <img src="https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=600" alt="Momento especial 4">
+                <div class="gallery-frame"></div>
             </div>
         </div>
     </section>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" id="lightboxClose">&times;</span>
-        <img class="lightbox-img" id="lightboxImg" src="" alt="">
-        <div class="lightbox-caption" id="lightboxCaption"></div>
+    <!-- Modal da Galeria -->
+    <div class="modal" id="photoModal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img class="modal-image" id="modalImage" src="" alt="Foto ampliada">
+            <p class="modal-description" id="modalDescription"></p>
+        </div>
     </div>
 
-    <!-- ONDA (transição) -->
-    <div class="wave-section" style="height: 100px; background: #ffe4e1;">
-        <div class="wave" style="top: -100px; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1440 320\"><path fill=\"%23f8d7da\" fill-opacity=\"1\" d=\"M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,165.3C672,160,768,192,864,208C960,224,1056,224,1152,202.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z\"></path></svg>') no-repeat; background-size: cover;"></div>
+    <!-- ONDAS SEPARADORAS (terceira) -->
+    <div class="wave-separator">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-1" fill="#c44569" fill-opacity="0.7" d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z M1200,50 Q1500,100 1800,50 T2400,50 L2400,120 L1200,120 Z"></path>
+            <path class="wave-2" fill="#ff6b9d" fill-opacity="0.5" d="M0,70 Q300,20 600,70 T1200,70 L1200,120 L0,120 Z M1200,70 Q1500,20 1800,70 T2400,70 L2400,120 L1200,120 Z"></path>
+        </svg>
     </div>
 
-    <!-- SEÇÃO 4: LINHA DO TEMPO -->
-    <section class="timeline-section fade-in" id="timeline">
-        <h2 class="timeline-title">Por que você é incrível</h2>
+    <!-- LINHA DO TEMPO -->
+    <section class="timeline-section" id="timeline">
+        <h2 class="timeline-title scroll-reveal">Tudo Sobre Você</h2>
         <div class="timeline">
-            <div class="timeline-item">"Você é a moça mais bonita que já vi."</div>
-            <div class="timeline-item">"Você é a moça mais engraçada que já conheci"</div>
-            <div class="timeline-item">"Você é a moça mais incrível que já conversei"</div>
-            <div class="timeline-item">"Você é a moça mais brava que existe nesse mundo"</div>
-            <div class="timeline-item">"Você também é a moça mais fofa"</div>
-            <div class="timeline-item">"Você é a moça mais fogo, enquanto eu sou o moço mais água"</div>
-            <div class="timeline-item">"Enfim, feliz aniversário, meu bem! Que Deus te proteja, guarde, ilumine, abençoe e guie. Que seus próximos anos sejam maravilhosos e que nesses dias você ganhe as lutas diárias contra os demônios que há nesta vida. Que você seja essa pessoa alegre, divertida, legal, inteligente, sagaz, impressionante pelo resto de sua vida. E como sempre digo, saiba que te amo muito."</div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Você é a moça mais bonita que já vi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Você é a moça mais engraçada que já conheci.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Você é a moça mais incrível que já conversei.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Você é a moça mais brava que existe nesse mundo.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Você também é a moça mais fofa.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Você é a moça mais fogo, enquanto eu sou o moço mais água.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <p class="timeline-text">Enfim, feliz aniversário, meu bem! Que Deus te proteja, guarde, ilumine, abençoe e guie. Que seus próximos anos sejam maravilhosos e que nesses dias você ganhe as lutas diárias contra os demônios que há nesta vida. Que você seja essa pessoa alegre, divertida, legal, inteligente, sagaz, impressionante pelo resto de sua vida. E como sempre digo, saiba que te amo muito.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ONDA (transição) -->
-    <div class="wave-section" style="height: 100px; background: #f8d7da;">
-        <div class="wave" style="top: -100px; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1440 320\"><path fill=\"%231a1a2e\" fill-opacity=\"1\" d=\"M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,165.3C672,160,768,192,864,208C960,224,1056,224,1152,202.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z\"></path></svg>') no-repeat; background-size: cover;"></div>
+    <!-- ONDAS SEPARADORAS (quarta) -->
+    <div class="wave-separator">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path class="wave-1" fill="#ff6b9d" fill-opacity="0.7" d="M0,50 Q300,0 600,50 T1200,50 L1200,0 L0,0 Z M1200,50 Q1500,0 1800,50 T2400,50 L2400,0 L1200,0 Z"></path>
+            <path class="wave-2" fill="#c44569" fill-opacity="0.5" d="M0,70 Q300,120 600,70 T1200,70 L1200,0 L0,0 Z M1200,70 Q1500,120 1800,70 T2400,70 L2400,0 L1200,0 Z"></path>
+        </svg>
     </div>
 
-    <!-- SEÇÃO 5: UNIVERSO -->
-    <section class="universe-section fade-in" id="universe">
-        <div class="universe-bg"></div>
+    <!-- SEÇÃO DO UNIVERSO -->
+    <section class="universe-section">
+        <div class="universe-background"></div>
         <div class="universe-content">
-            <h2>Mesmo no meio do universo, eu escolheria você <3</h2>
+            <p class="universe-text">Mesmo no meio do universo,<br>eu escolheria você ♥</p>
         </div>
     </section>
 
-    <!-- SEÇÃO 6: AUTOR -->
-    <section class="author-section fade-in" id="author">
-        <img src="https://i.ibb.co/fY1sZk6f/20260105-121313.jpg" alt="Vitor" class="author-photo">
-        <p>Feito com amor, por Vitor da Costa.</p>
+    <!-- FOOTER -->
+    <section class="footer-section">
+        <div class="author-container">
+            <img class="author-photo" src="https://i.ibb.co/fY1sZk6f/20260105-121313.jpg" alt="Vitor da Costa">
+            <p class="author-text">Feito com amor, por Vitor da Costa.</p>
+        </div>
     </section>
 
     <script>
-        // ===== FUNCIONALIDADES =====
+        // ============= SCROLL TO LETTER =============
+        function scrollToLetter() {
+            const letterSection = document.getElementById('letter');
+            letterSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Iniciar efeito de digitação após um pequeno delay
+            setTimeout(() => {
+                typeWriter();
+            }, 800);
+        }
 
-        // 1. Botão rolar para a seção da carta
-        document.getElementById('scrollButton').addEventListener('click', function() {
-            document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
-        });
+        // ============= EFEITO DE DIGITAÇÃO =============
+        const letterMessage = "EM BREVE";
+        let i = 0;
+        let typingStarted = false;
 
-        // 2. Efeito de digitação já está no CSS, mas podemos ajustar para mobile?
-        // (já está funcionando)
+        function typeWriter() {
+            if (typingStarted) return;
+            typingStarted = true;
+            
+            const letterText = document.getElementById('letterText');
+            letterText.innerHTML = '';
+            
+            function type() {
+                if (i < letterMessage.length) {
+                    letterText.innerHTML += letterMessage.charAt(i);
+                    i++;
+                    setTimeout(type, 150);
+                } else {
+                    // Adicionar cursor piscante no final
+                    letterText.innerHTML += '<span class="typing-cursor"></span>';
+                }
+            }
+            
+            type();
+        }
 
-        // 3. Lightbox da galeria
+        // ============= SCROLL REVEAL ANIMATION =============
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal, .gallery-item, .timeline-item');
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Chamar uma vez ao carregar
+
+        // ============= GALERIA MODAL =============
         const galleryItems = document.querySelectorAll('.gallery-item');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxCaption = document.getElementById('lightboxCaption');
-        const lightboxClose = document.getElementById('lightboxClose');
+        const modal = document.getElementById('photoModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalDescription = document.getElementById('modalDescription');
 
         galleryItems.forEach(item => {
             item.addEventListener('click', function() {
-                const src = this.getAttribute('data-src');
-                const caption = this.getAttribute('data-caption');
-                lightboxImg.src = src;
-                lightboxCaption.textContent = caption;
-                lightbox.classList.add('active');
+                const img = this.querySelector('img');
+                const description = this.getAttribute('data-description');
+                
+                modalImage.src = img.src;
+                modalDescription.textContent = description;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        lightboxClose.addEventListener('click', function() {
-            lightbox.classList.remove('active');
-        });
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
+        // Fechar modal ao clicar fora da imagem
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
             }
         });
 
-        // 4. Animação de fade-in ao rolar (Intersection Observer)
-        const faders = document.querySelectorAll('.fade-in');
-
-        const appearOptions = {
-            threshold: 0.2,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            });
-        }, appearOptions);
-
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
         });
 
-        // 5. Efeito de onda animada (já feita no CSS, mas podemos garantir que está funcionando)
-        // Não precisa de JS adicional
+        // ============= ANIMAÇÃO DOS CORAÇÕES NO BOTÃO =============
+        const heartButton = document.querySelector('.heart-button');
+        
+        heartButton.addEventListener('mouseenter', function() {
+            const hearts = document.querySelectorAll('.floating-heart');
+            hearts.forEach(heart => {
+                heart.style.animationPlayState = 'running';
+            });
+        });
 
-        // 6. Ajuste de altura das ondas para mobile (já está responsivo)
+        // ============= PARALLAX SUAVE NO HERO =============
+        window.addEventListener('scroll', function() {
+            const heroBackground = document.querySelector('.hero-background');
+            const scrolled = window.pageYOffset;
+            heroBackground.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+        });
 
-        // 7. Placeholder: como as fotos são do placeholder, avisamos no console
-        console.log("Site carregado! Substitua as imagens placeholder pelas suas fotos reais.");
+        // ============= ADICIONAR ESTRELAS CADENTES NO UNIVERSO =============
+        function createShootingStar() {
+            const universeSection = document.querySelector('.universe-section');
+            const star = document.createElement('div');
+            star.style.position = 'absolute';
+            star.style.width = '2px';
+            star.style.height = '2px';
+            star.style.background = 'white';
+            star.style.borderRadius = '50%';
+            star.style.boxShadow = '0 0 6px 2px white';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.zIndex = '2';
+            star.style.animation = 'shootingStar 2s linear forwards';
+            
+            universeSection.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+            }, 2000);
+        }
+
+        // Adicionar animação de estrela cadente
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shootingStar {
+                0% {
+                    transform: translateX(0) translateY(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateX(-200px) translateY(200px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Criar estrelas cadentes periodicamente
+        setInterval(createShootingStar, 3000);
     </script>
 </body>
 </html>
