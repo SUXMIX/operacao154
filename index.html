@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Aniversário, Isabelly! 💕</title>
+    <!-- Favicon: coração SVG -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff8aae' d='M50 20C35 20 25 30 25 45C25 60 45 75 50 80C55 75 75 60 75 45C75 30 65 20 50 20Z' /%3E%3C/svg%3E" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
@@ -1460,6 +1462,20 @@
             }
             isPlaying = !isPlaying;
         });
+
+        // ============= MEDIA SESSION (NOTIFICAÇÃO COM IMAGEM) =============
+        if ('mediaSession' in navigator) {
+            bgMusic.addEventListener('play', () => {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: 'Vem Ser Minha',
+                    artist: 'Charlie Brown Jr.',
+                    album: 'Aniversário Isabelly',
+                    artwork: [
+                        { src: 'https://i.ibb.co/fJ186QQ/IMG-20251118-WA0101.jpg', sizes: '512x512', type: 'image/jpeg' }
+                    ]
+                });
+            });
+        }
 
         // ============= SCROLL TO TOP =============
         const scrollToTopBtn = document.getElementById('scrollToTop');
