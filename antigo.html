@@ -1129,6 +1129,41 @@
             font-weight: 700;
         }
 
+        /* ============= BOTÃO VERSÃO NOVA ============= */
+        .new-version-btn {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.3rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            color: #ffffff;
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(255, 138, 174, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .new-version-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(255, 138, 174, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .new-version-btn {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.55rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
         /* ============= BOTÃO SCROLL TO TOP ============= */
         .scroll-to-top {
             position: fixed;
@@ -1264,6 +1299,11 @@
     <button class="music-toggle" id="musicToggle" aria-label="Tocar/Pausar música" title="Vem Ser Minha - Charlie Brown Jr.">
         🎵
     </button>
+
+    <!-- Botão para ir até a versão nova -->
+    <a href="index.html" class="new-version-btn" aria-label="Ir para a versão nova do site">
+        ✨ Versão nova
+    </a>
 
     <!-- Botão Scroll to Top -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Voltar ao topo">
